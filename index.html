@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <!-- PWA App 原生體驗設定 -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="尊榮人脈">
@@ -12,52 +11,19 @@
 
     <title>Private Wealth | VIP 財富人脈系統</title>
     <style>
-        /* 頂級私人財富管理風格：曜石黑、深海藍、香檳金 */
-        body { 
-            margin: 0; padding: 0; 
-            font-family: "Helvetica Neue", Arial, "微軟正黑體", sans-serif; 
-            background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%); 
-            color: #e0e1dd; 
-            -webkit-tap-highlight-color: transparent; 
-            min-height: 100vh;
-        }
-        
-        .app-header { 
-            position: fixed; top: 0; left: 0; width: 100%; 
-            background: rgba(13, 27, 42, 0.9); 
-            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-            color: #d4af37; text-align: center; 
-            padding: 22px 0; font-size: 20px; font-weight: 300; letter-spacing: 3px;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2); z-index: 1000; user-select: none;
-        }
-
+        body { margin: 0; padding: 0; font-family: "Helvetica Neue", Arial, "微軟正黑體", sans-serif; background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%); color: #e0e1dd; -webkit-tap-highlight-color: transparent; min-height: 100vh; }
+        .app-header { position: fixed; top: 0; left: 0; width: 100%; background: rgba(13, 27, 42, 0.9); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); color: #d4af37; text-align: center; padding: 22px 0; font-size: 20px; font-weight: 300; letter-spacing: 3px; border-bottom: 1px solid rgba(212, 175, 55, 0.2); z-index: 1000; user-select: none; cursor: pointer; transition: 0.3s; }
+        .app-header:active { background: rgba(13, 27, 42, 1); }
         .app-content { padding: 95px 20px 90px 20px; }
         .subtitle { text-align: center; color: #778da9; font-size: 13px; margin-bottom: 25px; font-weight: 300; letter-spacing: 2px; }
-
-        /* 頁面切換 */
         .page { display: none; animation: fadeIn 0.4s ease; }
         .page.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* 搜尋列 */
-        .search-container { 
-            display: flex; background: rgba(255, 255, 255, 0.03); 
-            border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 12px; padding: 6px; 
-            margin-bottom: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-        }
+        .search-container { display: flex; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 12px; padding: 6px; margin-bottom: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
         .search-input { flex: 1; border: none; background: transparent; padding: 15px; font-size: 16px; color: #fff; outline: none; letter-spacing: 1px; }
         .search-input::placeholder { color: #415a77; font-weight: 300; }
-        .search-btn { 
-            background: linear-gradient(135deg, #d4af37, #b58500); color: #0d1b2a; 
-            border: none; border-radius: 8px; padding: 0 20px; font-size: 15px; font-weight: 600; cursor: pointer;
-        }
-
-        /* VIP 卡片 */
-        .card { 
-            background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px; padding: 22px; margin-bottom: 22px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5); position: relative; overflow: hidden;
-        }
+        .search-btn { background: linear-gradient(135deg, #d4af37, #b58500); color: #0d1b2a; border: none; border-radius: 8px; padding: 0 20px; font-size: 15px; font-weight: 600; cursor: pointer; }
+        .card { background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; padding: 22px; margin-bottom: 22px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position: relative; overflow: hidden; }
         .card::before { content: ""; position: absolute; left: 0; top: 0; height: 100%; width: 5px; background: linear-gradient(to bottom, #d4af37, #b58500); }
         .card-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding-bottom: 12px; margin-bottom: 15px; }
         .card-name { font-size: 24px; font-weight: 400; color: #fff; letter-spacing: 2px;}
@@ -68,53 +34,31 @@
         .tag { font-size: 12px; padding: 6px 12px; border-radius: 20px; background: rgba(119, 141, 169, 0.15); color: #e0e1dd; border: 1px solid rgba(119, 141, 169, 0.3); }
         .tag-diet { background: rgba(229, 62, 62, 0.15); color: #ff6b6b; border-color: rgba(229, 62, 62, 0.3); }
         .tag-birthday { background: rgba(212, 175, 55, 0.2); color: #f6e05e; border-color: rgba(212, 175, 55, 0.5); font-weight: bold; }
-
-        /* 金融提案與祝福語專區 */
         .proposal-box { margin-top: 25px; background: rgba(212, 175, 55, 0.05); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 12px; padding: 20px; }
         .proposal-title { font-size: 14px; font-weight: 600; color: #d4af37; margin-bottom: 12px; letter-spacing: 1.5px; display: flex; align-items: center;}
         .proposal-title::before { content: "✧"; margin-right: 6px; font-size: 16px; }
         .proposal-text { font-size: 14.5px; color: #e0e1dd; line-height: 1.7; margin: 0; font-weight: 300; letter-spacing: 0.5px;}
-        
-        /* LINE 專屬祝福語區塊 */
-        .line-blessing {
-            margin-top: 15px; padding: 15px; border-radius: 10px;
-            background: rgba(0, 195, 0, 0.1); border: 1px solid rgba(0, 195, 0, 0.3);
-            position: relative;
-        }
+        .line-blessing { margin-top: 15px; padding: 15px; border-radius: 10px; background: rgba(0, 195, 0, 0.1); border: 1px solid rgba(0, 195, 0, 0.3); position: relative; }
         .line-title { color: #00c300; font-size: 13px; font-weight: bold; margin-bottom: 8px; display: flex; align-items: center;}
         .line-text { font-size: 14px; color: #e0e1dd; line-height: 1.6; white-space: pre-wrap; font-weight: 300; }
-        .copy-btn {
-            margin-top: 10px; width: 100%; padding: 10px; background: #00c300; color: white;
-            border: none; border-radius: 8px; font-size: 14px; font-weight: bold; cursor: pointer; transition: 0.3s;
-        }
+        .copy-btn { margin-top: 10px; width: 100%; padding: 10px; background: #00c300; color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: bold; cursor: pointer; transition: 0.3s; }
         .copy-btn:active { background: #009900; }
-
-        /* 底部導覽列 */
-        .bottom-nav {
-            position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(13, 27, 42, 0.95);
-            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-            display: flex; justify-content: space-around; align-items: center;
-            border-top: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: env(safe-area-inset-bottom); z-index: 1000;
-        }
+        .home-btn { margin-top: 10px; margin-bottom: 20px; width: 100%; padding: 14px; background: rgba(212, 175, 55, 0.08); color: #d4af37; border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 10px; font-size: 15px; font-weight: bold; letter-spacing: 1px; cursor: pointer; transition: 0.3s; }
+        .home-btn:active { background: rgba(212, 175, 55, 0.2); }
+        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(13, 27, 42, 0.95); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); display: flex; justify-content: space-around; align-items: center; border-top: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: env(safe-area-inset-bottom); z-index: 1000; }
         .nav-item { flex: 1; text-align: center; padding: 16px 0; color: #778da9; font-size: 13px; font-weight: 400; cursor: pointer; transition: 0.3s; }
         .nav-item.active { color: #d4af37; font-weight: 600; background: linear-gradient(to top, rgba(212, 175, 55, 0.1) 0%, transparent 100%); }
         .nav-icon { font-size: 20px; display: block; margin-bottom: 4px; }
-
-        /* Toast 提示 */
-        .toast {
-            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            background: rgba(0,0,0,0.8); color: white; padding: 12px 24px;
-            border-radius: 8px; font-size: 15px; display: none; z-index: 2000;
-        }
+        .toast { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.8); color: white; padding: 12px 24px; border-radius: 8px; font-size: 15px; display: none; z-index: 2000; }
+        a { color: #d4af37; text-decoration: none; }
     </style>
 </head>
 <body>
 
-<div class="app-header">PRIVATE WEALTH</div>
+<div class="app-header" onclick="goToHome()">PRIVATE WEALTH</div>
 <div id="toast" class="toast">✅ 已複製到剪貼簿！</div>
 
 <div class="app-content">
-    <!-- 頁面 1：尊榮搜尋頁 -->
     <div id="page-search" class="page active">
         <div class="subtitle">以利他之心，成就他人藍圖</div>
         <div class="search-container">
@@ -126,7 +70,6 @@
         </div>
     </div>
 
-    <!-- 頁面 2：本月壽星頁 -->
     <div id="page-birthday" class="page">
         <div class="subtitle" id="birthdayTitle" style="color:#d4af37; font-size: 16px; font-weight: 600;">✧ 本月專屬壽星 ✧</div>
         <p style="text-align:center; color:#778da9; font-size:13px; margin-bottom: 25px;">為您呈獻本月份的關鍵時刻，已按日期排序</p>
@@ -134,9 +77,8 @@
     </div>
 </div>
 
-<!-- 底部導覽列 -->
 <div class="bottom-nav">
-    <div class="nav-item active" onclick="switchPage('page-search', this)">
+    <div class="nav-item active" onclick="switchPage('page-search', this)" id="nav-search">
         <span class="nav-icon">🔍</span><span>尊榮搜尋</span>
     </div>
     <div class="nav-item" onclick="switchPage('page-birthday', this)">
@@ -145,7 +87,6 @@
 </div>
 
 <script>
-    // 109學年度通訊錄學員資料表 (依據最新來源完美建立 74 筆)
     const networkData = [
         { group: "1", name: "謝端純", birthday: "01月15日", company: "遠東油脂(股)", title: "董事長", diet: "無", family: "一代宗師", phone: "0928-625-689", email: "duanchun.shieh@gmail.com" },
         { group: "1", name: "劉永嘯", birthday: "01月18日", company: "台灣大哥大", title: "IT", diet: "無", family: "獅子頭", phone: "0922-440-927", email: "ivanliu@gmail.com" },
@@ -193,13 +134,13 @@
         { group: "5", name: "許美玲", birthday: "02月26日", company: "偉鎮集團", title: "財務會計部協理", diet: "不吃羊", family: "獅子頭", phone: "0922-999-366", email: "alice12182002@hotmail.com" },
         { group: "5", name: "郭淑芬", birthday: "05月07日", company: "美商野村化學車(有)", title: "總經理", diet: "不吃牛", family: "黃金獅", phone: "0932-500-710", email: "tina@bestid.com.tw" },
         { group: "5", name: "廖敏惠", birthday: "05月15日", company: "聯強國際", title: "業務經理", diet: "不吃牛", family: "萬獸之王", phone: "0953-352-000", email: "alice0515@gmail.com" },
-        { group: "5", name: "黃文清", birthday: "05月25日", company: "台新投顧", title: "研究服務", diet: "無", family: "至聖先師", phone: "0925-855-588", email: "wonching525@gmail.com" },
+        { group: "5", name: "黃文清", birthday: "05月25日", company: "台新投顾", title: "研究服務", diet: "無", family: "至聖先師", phone: "0925-855-588", email: "wonching525@gmail.com" },
         { group: "5", name: "張哲豪", birthday: "07月11日", company: "東山科技(有)", title: "總經理", diet: "無", family: "獅子王", phone: "0966-837-619", email: "s8320364@gmail.com" },
         { group: "5", name: "劉銘祐", birthday: "07月27日", company: "捷達數位系統(股)", title: "副總經理", diet: "不吃牛", family: "一代宗師", phone: "0928-221-234", email: "jackie@octor.com.tw" },
         { group: "5", name: "王沅錡", birthday: "08月16日", company: "TutorABC", title: "公關經理", diet: "無", family: "獅子王", phone: "0920-209-467", email: "Yuanchi.wang@gmail.com" },
 
         { group: "6", name: "張明道", birthday: "01月17日", company: "智易科技", title: "硬體研發資深經理", diet: "不吃牛/羊", family: "師輩秀", phone: "0955-993-723", email: "cyc68904@gmail.com" },
-        { group: "6", name: "蔡家杰", birthday: "01月21日", company: "世界先進", title: "主管", diet: "無", family: "師大大師", phone: "0930-841-309", email: "jaytsai0121@gmail.com" },
+        { group: "6", name: "蔡家傑", birthday: "01月21日", company: "世界先進", title: "主管", diet: "無", family: "師大大師", phone: "0930-841-309", email: "jaytsai0121@gmail.com" },
         { group: "6", name: "龍筱芬", birthday: "02月15日", company: "奇鈦科技(股)", title: "董事長", diet: "無", family: "萬獸之王", phone: "0932-061-518", email: "glung@chitec.com" },
         { group: "6", name: "劉逸凡", birthday: "05月09日", company: "建達國際(股)", title: "產品經理", diet: "無", family: "詩情話藝", phone: "0989-965-558", email: "ivan_liu@xander.com.tw" },
         { group: "6", name: "王宜方", birthday: "07月02日", company: "美科實業(有)", title: "網路行銷經理", diet: "無", family: "萬獸之王", phone: "0981-052-685", email: "wang_green@hotmail.com" },
@@ -232,36 +173,46 @@
 
     window.onload = function() { loadCurrentMonthBirthdays(); };
 
+    function goToHome() {
+        document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+        document.getElementById('page-search').classList.add('active');
+        document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+        document.getElementById('nav-search').classList.add('active');
+        document.getElementById('keywordInput').value = "";
+        document.getElementById('resultsContainer').innerHTML = `<p style="text-align:center; color:#415a77; font-size:15px; margin-top:60px; font-weight: 300;">請輸入關鍵字，啟動尊榮行銷提案<br><br><span style="font-size:12px;">(提示：可輸入「第一組」或「1」尋找該組)</span></p>`;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
     function switchPage(pageId, element) {
         document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
         document.getElementById(pageId).classList.add('active');
         document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
         element.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function handleEnter(e) { if (e.keyCode === 13) { searchNetwork(); document.getElementById('keywordInput').blur(); } }
 
-    // ★ 智能星座運算與特質 ★
+    // ★ 升級版：12星座深度特質與客製化專屬祝福 (外部補充資訊) ★
     function getZodiacInfo(birthdayStr) {
         let m = parseInt(birthdayStr.split('月'));
-        let d = parseInt(birthdayStr.split('月')[1].replace('日',''));
+        let d = parseInt(birthdayStr.split('月').replace('日',''));
         
-        if ((m == 3 && d >= 21) || (m == 4 && d <= 19)) return { name: "牡羊座", trait: "充滿熱情與無畏的行動力🔥" };
-        if ((m == 4 && d >= 20) || (m == 5 && d <= 20)) return { name: "金牛座", trait: "務實可靠且具備卓越品味🌟" };
-        if ((m == 5 && d >= 21) || (m == 6 && d <= 21)) return { name: "雙子座", trait: "靈活敏銳、才華洋溢💫" };
-        if ((m == 6 && d >= 22) || (m == 7 && d <= 22)) return { name: "巨蟹座", trait: "溫柔細膩、極具親和力與包容心🌸" };
-        if ((m == 7 && d >= 23) || (m == 8 && d <= 22)) return { name: "獅子座", trait: "魅力四射、天生具備王者風範🦁" };
-        if ((m == 8 && d >= 23) || (m == 9 && d <= 22)) return { name: "處女座", trait: "追求卓越、心思細密且專業🎯" };
-        if ((m == 9 && d >= 23) || (m == 10 && d <= 23)) return { name: "天秤座", trait: "氣質優雅、擅長溝通協調的和諧者🕊️" };
-        if ((m == 10 && d >= 24) || (m == 11 && d <= 22)) return { name: "天蠍座", trait: "洞察力強、充滿深邃與神秘魅力🦅" };
-        if ((m == 11 && d >= 23) || (m == 12 && d <= 21)) return { name: "射手座", trait: "樂觀開朗、具備宏觀視野與理想🌈" };
-        if ((m == 12 && d >= 22) || (m == 1 && d <= 19)) return { name: "摩羯座", trait: "沉穩內斂、具備卓越堅毅的領導力🏔️" };
-        if ((m == 1 && d >= 20) || (m == 2 && d <= 18)) return { name: "水瓶座", trait: "充滿創新思維與遠見的開拓者💡" };
-        if ((m == 2 && d >= 19) || (m == 3 && d <= 20)) return { name: "雙魚座", trait: "溫暖包容、富有極佳人緣與浪漫🌊" };
-        return { name: "專屬星座", trait: "散發獨特魅力" };
+        if ((m == 3 && d >= 21) || (m == 4 && d <= 19)) return { name: "牡羊座", trait: "充滿熱情與無畏的行動力🔥", wish: "願您以無比的行動力，持續開創事業與財富的新版圖！" };
+        if ((m == 4 && d >= 20) || (m == 5 && d <= 20)) return { name: "金牛座", trait: "務實可靠且具備卓越品味🌟", wish: "願您盡情享受高質感的生活，財富也能如您的步伐般穩健累積！" };
+        if ((m == 5 && d >= 21) || (m == 6 && d <= 21)) return { name: "雙子座", trait: "靈活敏銳、才華洋溢💫", wish: "願您靈感不斷，精準掌握每一個市場新機，天天充滿驚喜！" };
+        if ((m == 6 && d >= 22) || (m == 7 && d <= 22)) return { name: "巨蟹座", trait: "溫柔細膩、極具親和力與包容心🌸", wish: "願您被世界溫柔相待，家庭幸福美滿，擁有最安心的財富防護網！" };
+        if ((m == 7 && d >= 23) || (m == 8 && d <= 22)) return { name: "獅子座", trait: "魅力四射、天生具備王者風範🦁", wish: "願您在自己的專屬舞台上持續閃耀，成就非凡的領袖事業！" };
+        if ((m == 8 && d >= 23) || (m == 9 && d <= 22)) return { name: "處女座", trait: "追求卓越、心思細密且專業🎯", wish: "願您的每一個決策都能完美落地，在追求卓越的同時享受最豐碩的果實！" };
+        if ((m == 9 && d >= 23) || (m == 10 && d <= 23)) return { name: "天秤座", trait: "氣質優雅、擅長溝通協調🕊️", wish: "願您的人脈左右逢源，在生活與事業之間取得最優雅完美的平衡！" };
+        if ((m == 10 && d >= 24) || (m == 11 && d <= 22)) return { name: "天蠍座", trait: "洞察力強、充滿深邃與神秘魅力🦅", wish: "願您帶著敏銳的眼光與智慧，穩中求勝，掌握人生的絕對優勢！" };
+        if ((m == 11 && d >= 23) || (m == 12 && d <= 21)) return { name: "射手座", trait: "樂觀開朗、具備宏觀視野與理想🌈", wish: "願您永遠保持樂觀開朗，自由翱翔於世界，財富與夢想一同展翅高飛！" };
+        if ((m == 12 && d >= 22) || (m == 1 && d <= 19)) return { name: "摩羯座", trait: "沉穩內斂、具備卓越堅毅的領導力🏔️", wish: "願您穩紮穩打的努力皆化為傲人資產，帶領事業一步步攀向頂峰！" };
+        if ((m == 1 && d >= 20) || (m == 2 && d <= 18)) return { name: "水瓶座", trait: "充滿創新思維與遠見的開拓者💡", wish: "願您永遠走在時代的尖端，用獨特的創意與前瞻性點亮財富之路！" };
+        if ((m == 2 && d >= 19) || (m == 3 && d <= 20)) return { name: "雙魚座", trait: "溫暖包容、富有極佳人緣與浪漫🌊", wish: "願您被滿滿的愛與善意包圍，人生藍圖如您夢想般美好實現！" };
+        return { name: "專屬星座", trait: "散發獨特魅力", wish: "願您在未來的日子裡萬事順心，好運連連！" };
     }
 
-    // ★ 歷史與季節意象生成器 ★
     function getHistoricalHook(month) {
         if (month >= 2 && month <= 4) return "在這個春意盎然、充滿生機的時節🌱，歷史上的今天曾發生許多改變世界的啟程。";
         if (month >= 5 && month <= 7) return "在這個熱情活力、陽光耀眼的時節☀️，歷史上的今天曾締造過無數輝煌的紀錄。";
@@ -269,15 +220,14 @@
         return "在這個沉穩內斂、孕育希望的時節❄️，歷史上的今天曾積蓄過無數改變未來的能量。";
     }
 
-    // ★ LINE 專屬客製化祝福語生成器 ★
+    // ★ 結合星座專屬賀詞的 LINE 文案生成器 ★
     function generateLINEBlessing(person) {
         let m = parseInt(person.birthday.split('月'));
         let zInfo = getZodiacInfo(person.birthday);
         let hook = getHistoricalHook(m);
-        // 使用職稱代替性別稱呼，顯得更為尊榮得體
         let respectTitle = person.title || "長官/學長姐"; 
         
-        let msg = `親愛的 ${person.name} ${respectTitle} 您好：\n\n今天是 ${person.birthday}，屬於${zInfo.name}的特別日子！🎂\n\n${hook}\n但對我來說，今天最重要的大事，就是慶祝您的誕生！🎉\n\n非常欣賞您「${zInfo.trait}」！在未來的日子裡，願您的事業如日中天，健康平安，家庭幸福美滿！🥂\n\n若未來有任何財務或人生藍圖上的規劃，隨時為您安排最頂級的服務。\n\n再次祝您 生日快樂、萬事順心！🎊🎁`;
+        let msg = `親愛的 ${person.name} ${respectTitle} 您好：\n\n今天是 ${person.birthday}，屬於${zInfo.name}的特別日子！🎂\n\n${hook}\n但對我來說，今天最重要的大事，就是慶祝您的誕生！🎉\n\n非常欣賞您「${zInfo.trait}」！\n\n${zInfo.wish} 🥂\n\n若未來有任何財務或人生藍圖上的規劃，我隨時為您安排最頂級的服務。\n\n再次祝您 生日快樂、平安健康！🎊🎁`;
         return msg;
     }
 
@@ -295,18 +245,16 @@
         let lineBlessingBlock = "";
 
         if (isBirthdayPage) {
-            // 生日頁面專屬：LINE 祝福語區塊
             let blessingText = generateLINEBlessing(person);
             let textId = `blessing-${index}`;
             lineBlessingBlock = `
                 <div class="line-blessing">
-                    <div class="line-title">💬 LINE 專屬客製化祝福語</div>
+                    <div class="line-title">💬 LINE 專屬星座客製祝福</div>
                     <div class="line-text" id="${textId}">${blessingText}</div>
                     <button class="copy-btn" onclick="copyToClipboard('${textId}')">一鍵複製祝福語 📋</button>
                 </div>
             `;
         } else {
-            // 搜尋頁面：顯示金融提案
             let title = person.title || "";
             let suggestion = "";
             if (title.includes("董事長") || title.includes("總經理") || title.includes("負責人") || title.includes("老板") || title.includes("執行長") || title.includes("創辦人") || title.includes("代表人") || title.includes("副總召")) {
@@ -387,6 +335,7 @@
         } else {
             container.innerHTML = `<p style="font-size:14px; color:#a0aec0; margin-bottom:15px; font-weight:300; letter-spacing:1px;">為您精準匹配 <b>${results.length}</b> 位尊榮客戶：</p>`;
             results.forEach((person, idx) => { container.innerHTML += createPersonCardHTML(person, false, idx); });
+            container.innerHTML += `<button class="home-btn" onclick="goToHome()">🏠 回首頁 / 重新搜尋</button>`;
         }
     }
 
@@ -402,8 +351,8 @@
         let monthBirthdays = networkData.filter(person => person.birthday && person.birthday.startsWith(currentMonthStr));
 
         monthBirthdays.sort((a, b) => {
-            let dayA = parseInt(a.birthday.split('月')[1].replace('日', ''));
-            let dayB = parseInt(b.birthday.split('月')[1].replace('日', ''));
+            let dayA = parseInt(a.birthday.split('月').replace('日', ''));
+            let dayB = parseInt(b.birthday.split('月').replace('日', ''));
             return dayA - dayB;
         });
 
@@ -418,4 +367,4 @@
 </script>
 
 </body>
-</html>
+</html
