@@ -1,0 +1,335 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- PWA App 設定 -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="尊榮人脈">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#0a1128">
+
+    <title>Private Wealth | VIP 財富人脈系統</title>
+    <style>
+        /* 頂級私人財富管理風格 (曜石黑/深海藍/香檳金) */
+        body { 
+            margin: 0; padding: 0; 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            background: linear-gradient(135deg, #0a1128 0%, #162238 100%); 
+            color: #f8f9fa; 
+            -webkit-tap-highlight-color: transparent; 
+            min-height: 100vh;
+        }
+        
+        .app-header { 
+            position: fixed; top: 0; left: 0; width: 100%; 
+            background: rgba(10, 17, 40, 0.95); 
+            backdrop-filter: blur(10px);
+            color: #d4af37; /* 香檳金 */
+            text-align: center; 
+            padding: 20px 0; 
+            font-size: 20px; 
+            font-weight: 300; 
+            letter-spacing: 2px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            z-index: 1000; 
+            user-select: none;
+        }
+
+        .app-content { padding: 90px 18px 40px 18px; }
+
+        .subtitle { 
+            text-align: center; color: #a0aec0; font-size: 14px; 
+            margin-bottom: 25px; font-weight: 300; letter-spacing: 1px;
+        }
+
+        /* 搜尋列設計 */
+        .search-container { 
+            display: flex; background: rgba(255, 255, 255, 0.05); 
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 12px; padding: 5px; 
+            margin-bottom: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+        .search-input { 
+            flex: 1; border: none; background: transparent; 
+            padding: 15px; font-size: 16px; color: #fff; outline: none; 
+        }
+        .search-input::placeholder { color: #718096; }
+        
+        .search-btn { 
+            background: linear-gradient(135deg, #d4af37, #aa8c2c); 
+            color: #0a1128; border: none; border-radius: 10px; 
+            padding: 0 20px; font-size: 15px; font-weight: bold; 
+            cursor: pointer; transition: 0.3s;
+        }
+        .search-btn:active { opacity: 0.8; }
+
+        /* VIP 結果卡片 */
+        .card { 
+            background: rgba(255, 255, 255, 0.03); 
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px; padding: 20px; margin-bottom: 20px; 
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4); 
+            position: relative; overflow: hidden;
+        }
+        .card::before {
+            content: ""; position: absolute; left: 0; top: 0; 
+            height: 100%; width: 4px; background: #d4af37;
+        }
+        
+        .card-header { 
+            display: flex; justify-content: space-between; align-items: center; 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08); 
+            padding-bottom: 12px; margin-bottom: 15px; 
+        }
+        .card-name { font-size: 22px; font-weight: 400; color: #fff; letter-spacing: 1px;}
+        .card-group { font-size: 13px; color: #d4af37; border: 1px solid #d4af37; padding: 4px 10px; border-radius: 20px; font-weight: bold;}
+        
+        .card-info { margin: 8px 0; font-size: 15px; color: #cbd5e0; display: flex; align-items: flex-start; }
+        .info-icon { margin-right: 12px; font-size: 16px; color: #d4af37; }
+        
+        .tags-container { margin: 15px 0; display: flex; flex-wrap: wrap; gap: 8px; }
+        .tag { font-size: 12px; padding: 5px 12px; border-radius: 20px; background: rgba(212, 175, 55, 0.15); color: #e2e8f0; border: 1px solid rgba(212, 175, 55, 0.3); }
+        .tag-diet { background: rgba(229, 62, 62, 0.15); color: #fc8181; border-color: rgba(229, 62, 62, 0.3); }
+
+        /* 利他無我提案專區 */
+        .proposal-box { 
+            margin-top: 20px; background: rgba(212, 175, 55, 0.05); 
+            border: 1px solid rgba(212, 175, 55, 0.2); 
+            border-radius: 12px; padding: 18px; 
+        }
+        .proposal-title { font-size: 14px; font-weight: 600; color: #d4af37; margin-bottom: 10px; letter-spacing: 1px; }
+        .proposal-text { font-size: 14.5px; color: #e2e8f0; line-height: 1.6; margin: 0; font-weight: 300;}
+        .warm-tip { margin-top: 15px; font-size: 13px; color: #f6e05e; font-weight: 400; border-top: 1px dashed rgba(212, 175, 55, 0.3); padding-top: 12px;}
+        
+        a { color: #d4af37; text-decoration: none; }
+    </style>
+</head>
+<body>
+
+<div class="app-header">
+    PRIVATE WEALTH
+</div>
+
+<div class="app-content">
+    <div class="subtitle">以利他之心，成就他人藍圖</div>
+    
+    <div class="search-container">
+        <input type="text" id="keywordInput" class="search-input" placeholder="搜尋姓名、組別、職稱或飲食..." onkeypress="handleEnter(event)">
+        <button class="search-btn" onclick="searchNetwork()">精準搜尋</button>
+    </div>
+
+    <div id="resultsContainer">
+        <p style="text-align:center; color:#4a5568; font-size:15px; margin-top:50px; font-weight: 300;">請輸入關鍵字，為客戶展開專屬提案<br><br><span style="font-size:13px;">提示：可輸入「第一組」或「1」來尋找該組同學</span></p>
+    </div>
+</div>
+
+<script>
+    // 109學年度通訊錄學員資料表 (74筆完整資料)
+    const networkData = [
+        { group: "1", name: "謝端純", birthday: "01月15日", company: "遠東油脂(股)", title: "董事長", diet: "無", family: "一代宗師", phone: "0928-625-689", email: "duanchun.shieh@gmail.com" },
+        { group: "1", name: "劉永嘯", birthday: "01月18日", company: "台灣大哥大", title: "IT", diet: "無", family: "獅子頭", phone: "0922-440-927", email: "ivanliu@gmail.com" },
+        { group: "1", name: "黃淑芬", birthday: "02月13日", company: "全球人壽保險資產處", title: "業務經理", diet: "不吃牛", family: "愛力獅", phone: "0932-075-397", email: "hsf8628@gmail.com" },
+        { group: "1", name: "蔣學慈", birthday: "05月20日", company: "私立再生護理之家", title: "副執行長", diet: "不吃羊", family: "師大大師", phone: "0987-086-173", email: "siua1198@yahoo.com.tw" },
+        { group: "1", name: "蘇品忠", birthday: "08月20日", company: "美泰電子(有)", title: "總經理", diet: "無", family: "NICE", phone: "0918-214-115", email: "Stevensutaiwan@gmail.com" },
+        { group: "1", name: "張嘉祥", birthday: "09月06日", company: "競宸綜合事業(有)", title: "資深副總召", diet: "無", family: "詩情話藝", phone: "0922-216-333", email: "charvsc@gmail.com" },
+        { group: "1", name: "洪以倩", birthday: "09月08日", company: "三商餐飲(股)", title: "行銷企劃部經理", diet: "不吃羊", family: "黃金獅", phone: "0935-352-234", email: "sunnyhung4007@gmail.com" },
+        { group: "1", name: "林育如", birthday: "10月22日", company: "元大投信", title: "副總", diet: "不吃羊", family: "一代宗師", phone: "0935-152-306", email: "sandy-lin@yuanta.com" },
+        { group: "1", name: "劉人豪", birthday: "12月23日", company: "FreakOut Taiwan", title: "總經理", diet: "無", family: "獅子王", phone: "8100272", email: "7500zw@gmail.com" },
+        { group: "1", name: "蘇裕凱", birthday: "12月28日", company: "Hewlett Packard Enterprise", title: "Service Team Leader", diet: "無", family: "至聖先師", phone: "0988-229-508", email: "109590119@gapps.ntnu.edu.tw" },
+        
+        { group: "2", name: "黃智弘", birthday: "01月07日", company: "台灣研華(股)", title: "總經理", diet: "無", family: "獅子王", phone: "0933-169-789", email: "henry.fgc@gmail.com" },
+        { group: "2", name: "張菀軒", birthday: "02月04日", company: "台灣中小企業銀行", title: "企金部副理", diet: "無", family: "至聖先師", phone: "0905-076-157", email: "tbb081788@gmail.com" },
+        { group: "2", name: "黃玉蓉", birthday: "06月06日", company: "亞圖國際(股)", title: "空運部經理", diet: "不吃牛", family: "師大大師", phone: "0968-898-398", email: "amy.huang888@qq.com" },
+        { group: "2", name: "陳宗彥", birthday: "07月16日", company: "HP/惠普", title: "Platform lead", diet: "無", family: "詩情話藝", phone: "0922-104-072", email: "roger0716@gmail.com" },
+        { group: "2", name: "林歆華", birthday: "07月22日", company: "聯強國際", title: "產品經理", diet: "無", family: "至聖先師", phone: "0988-525-672", email: "Cindy0722@hotmail.com.tw" },
+        { group: "2", name: "鄭武濱", birthday: "08月18日", company: "漢衛公司", title: "董事長", diet: "無", family: "師大大師", phone: "0972-719-155", email: "hanwaytp@hanwaycompany.com" },
+        { group: "2", name: "林昭慶", birthday: "09月13日", company: "藝術工作室", title: "老板", diet: "奶蛋素", family: "黃金獅", phone: "0935-770-522", email: "aa0935770522@gmail.com" },
+        { group: "2", name: "梁金鳳", birthday: "09月26日", company: "活水銀髮族健康保險概念館", title: "執行長", diet: "無", family: "淡定大師", phone: "0932-221-836", email: "joannaegle@gmail.com" },
+        { group: "2", name: "葉昭蓮", birthday: "09月27日", company: "斯鼎系統(股)", title: "人資部經理", diet: "無", family: "NICE", phone: "0965-633-611", email: "cfyeh0927@163.com" },
+
+        { group: "3", name: "詹嘉怡", birthday: "01月10日", company: "上海商銀", title: "資訊研發", diet: "無", family: "萬獸之王", phone: "0918-087-722", email: "plusoonechan@gmail.com" },
+        { group: "3", name: "余淑娟", birthday: "01月15日", company: "鴻海集團", title: "人資", diet: "不吃牛/羊", family: "獅子頭", phone: "0925-285-196", email: "Ellenyu@gih-foxconn.com" },
+        { group: "3", name: "楊志忠", birthday: "05月07日", company: "光鼎科技", title: "副總", diet: "無", family: "淡定大師", phone: "0953-093-516", email: "Eric19790507@gmail.com" },
+        { group: "3", name: "謝佩宸", birthday: "05月22日", company: "中信造", title: "業務", diet: "無", family: "黃金獅", phone: "0952-737-908", email: "laura880402@gmail.com" },
+        { group: "3", name: "游永旭", birthday: "07月15日", company: "新光金控", title: "資深電腦稽核", diet: "無", family: "獅子頭", phone: "0952-719-227", email: "tim.yu@skfh.com.tw" },
+        { group: "3", name: "劉致錚", birthday: "08月03日", company: "品建築師事務所", title: "建築師", diet: "無", family: "淡定大師", phone: "0916-005-006", email: "kevinliu0803@gmail.com" },
+        { group: "3", name: "吳怡芳", birthday: "09月16日", company: "極富投資諮詢(上海)", title: "諮詢培訓服務", diet: "不吃羊", family: "一代宗師", phone: "0911-393-340", email: "alicewu108@gmail.com" },
+        { group: "3", name: "王憶雯", birthday: "10月31日", company: "立而登實業(股)", title: "總經理", diet: "無", family: "獅子頭", phone: "0988-359-568", email: "monica9899@hotmail.com" },
+        { group: "3", name: "陳進賢", birthday: "11月18日", company: "歐立威科技", title: "技術協理", diet: "無", family: "師大大師", phone: "0916-805-975", email: "alexcl68@gmail.com" },
+
+        { group: "4", name: "陳泓銘", birthday: "01月27日", company: "台灣妙管家(股)", title: "法務主管", diet: "無", family: "一代宗師", phone: "0910-339-588", email: "theanan0127@hotmail.com" },
+        { group: "4", name: "任啟綱", birthday: "06月06日", company: "綠光能數位(有)", title: "業務行銷", diet: "無", family: "黃金獅", phone: "0936-225-504", email: "ckjen@gsld.com.tw" },
+        { group: "4", name: "何玉珊", birthday: "06月13日", company: "國泰人壽", title: "銀行保險代理", diet: "無", family: "詩情話藝", phone: "0963-177-897", email: "ddo_obb@hotmail.com" },
+        { group: "4", name: "葉宗源", birthday: "06月15日", company: "戴爾電腦科技(股)", title: "硬體研發經理", diet: "無", family: "愛力獅", phone: "0928-066-057", email: "billyeh1119@gmail.com" },
+        { group: "4", name: "林宸甄", birthday: "10月29日", company: "立榮航空", title: "副課長", diet: "不吃牛/羊", family: "愛力獅", phone: "0988-093-962", email: "angelalin@uniair.com.tw" },
+        { group: "4", name: "戴淑惠", birthday: "11月28日", company: "信保基金", title: "經理", diet: "不吃牛", family: "師輩秀", phone: "0933-061-458", email: "taishuhui@smeg.org.tw" },
+        { group: "4", name: "詹章誾", birthday: "12月05日", company: "全順機電(股)", title: "總經理", diet: "純素", family: "愛力獅", phone: "0972-175-883", email: "all pass.ee@hinet.net" },
+        { group: "4", name: "灍心怡", birthday: "12月21日", company: "SOGO百貨", title: "副理", diet: "無", family: "愛力獅", phone: "0928-120-551", email: "ivychueh1221@gmail.com" },
+
+        { group: "5", name: "楊榮光", birthday: "02月12日", company: "中華醫藥產業(股)", title: "董事長", diet: "無", family: "淡定大師", phone: "0928-505-287", email: "richardspec@gmail.com" },
+        { group: "5", name: "孫家瑞", birthday: "02月23日", company: "台灣山葉音樂(股)", title: "營業部經理", diet: "無", family: "獅子王", phone: "0922-866-199", email: "lcssmilo@gmail.com" },
+        { group: "5", name: "黃羽妁", birthday: "02月24日", company: "中信銀", title: "人力資源部經理", diet: "無", family: "淡定大師", phone: "0938-018-520", email: "chloe.huang@kimo.com" },
+        { group: "5", name: "許美玲", birthday: "02月26日", company: "偉鎮集團", title: "財務會計部協理", diet: "不吃羊", family: "獅子頭", phone: "0922-999-366", email: "alice12182002@hotmail.com" },
+        { group: "5", name: "郭淑芬", birthday: "05月07日", company: "美商野村化學車(有)", title: "總經理", diet: "不吃牛", family: "黃金獅", phone: "0932-500-710", email: "tina@bestid.com.tw" },
+        { group: "5", name: "廖敏惠", birthday: "05月15日", company: "聯強國際", title: "業務經理", diet: "不吃牛", family: "萬獸之王", phone: "0953-352-000", email: "alice0515@gmail.com" },
+        { group: "5", name: "黃文清", birthday: "05月25日", company: "台新投顧", title: "研究服務", diet: "無", family: "至聖先師", phone: "0925-855-588", email: "wonching525@gmail.com" },
+        { group: "5", name: "張哲豪", birthday: "07月11日", company: "東山科技(有)", title: "總經理", diet: "無", family: "獅子王", phone: "0966-837-619", email: "s8320364@gmail.com" },
+        { group: "5", name: "劉銘祐", birthday: "07月27日", company: "捷達數位系統(股)", title: "副總經理", diet: "不吃牛", family: "一代宗師", phone: "0928-221-234", email: "jackie@octor.com.tw" },
+        { group: "5", name: "王沅錡", birthday: "08月16日", company: "TutorABC", title: "公關經理", diet: "無", family: "獅子王", phone: "0920-209-467", email: "Yuanchi.wang@gmail.com" },
+
+        { group: "6", name: "張明道", birthday: "01月17日", company: "智易科技", title: "硬體研發資深經理", diet: "不吃牛/羊", family: "師輩秀", phone: "0955-993-723", email: "cyc68904@gmail.com" },
+        { group: "6", name: "蔡家傑", birthday: "01月21日", company: "世界先進", title: "Not in source", diet: "無", family: "師大大師", phone: "0930-841-309", email: "jaytsai0121@gmail.com" },
+        { group: "6", name: "龍筱芬", birthday: "02月15日", company: "奇鈦科技(股)", title: "董事長", diet: "無", family: "萬獸之王", phone: "0932-061-518", email: "glung@chitec.com" },
+        { group: "6", name: "劉逸凡", birthday: "05月09日", company: "建達國際(股)", title: "產品經理", diet: "無", family: "詩情話藝", phone: "0989-965-558", email: "ivan_liu@xander.com.tw" },
+        { group: "6", name: "王宜方", birthday: "07月02日", company: "美科實業(有)", title: "網路行銷經理", diet: "無", family: "萬獸之王", phone: "0981-052-685", email: "wang_green@hotmail.com" },
+        { group: "6", name: "劉梓翔", birthday: "10月01日", company: "中信金", title: "業務主管", diet: "無", family: "獅子頭", phone: "0987-168-755", email: "lu2242107@yahoo.com.tw" },
+        { group: "6", name: "張湘英", birthday: "11月13日", company: "維酷公關", title: "顧問", diet: "無", family: "愛力獅", phone: "0986-253-110", email: "vocalise1113@gmail.com" },
+        { group: "6", name: "洪淑芬", birthday: "11月23日", company: "幼兒園", title: "負責人", diet: "不吃牛/羊/蛋", family: "黃金獅", phone: "0935-565-961", email: "Sophia9972@yahoo.com.tw" },
+        { group: "6", name: "詹學鳳", birthday: "12月10日", company: "自由業", title: "企劃", diet: "奶蛋素", family: "一代宗師", phone: "0935-996-327", email: "Hottosy@hotmail.com" },
+
+        { group: "7", name: "蘇睦詔", birthday: "01月09日", company: "國泰人壽", title: "業務經理", diet: "不吃牛", family: "師大大師", phone: "0921-910-827", email: "moowou@hotmail.com" },
+        { group: "7", name: "吳錦宗", birthday: "04月01日", company: "中華都市顧問平台(有)", title: "代表人", diet: "不吃羊", family: "一代宗師", phone: "0915-751-152", email: "justin08310801@gmail.com" },
+        { group: "7", name: "董嘉慧", birthday: "04月03日", company: "美科實業(有)", title: "經理", diet: "不吃羊/奶製品", family: "NICE", phone: "0933-121-691", email: "karol0403@hotmail.com" },
+        { group: "7", name: "藍文正", birthday: "06月08日", company: "Systex", title: "處長", diet: "無", family: "淡定大師", phone: "0919-919-972", email: "wesleylan68@gmail.com" },
+        { group: "7", name: "蕭偉志", birthday: "07月11日", company: "Waters Corporation", title: "營運總監", diet: "無", family: "萬獸之王", phone: "0987-038-373", email: "hsiao2000@hotmail.com" },
+        { group: "7", name: "徐月玲", birthday: "11月07日", company: "金開(股)", title: "財務長", diet: "無", family: "至聖先師", phone: "0916-180-376", email: "amy168168198@gmail.com" },
+        { group: "7", name: "任珮云", birthday: "11月20日", company: "時報資訊", title: "記者", diet: "無", family: "詩情話藝", phone: "0915-392-228", email: "bluesky8858@yahoo.com.tw" },
+        { group: "7", name: "湯文洋", birthday: "12月14日", company: "捷達數位系統(股)", title: "負責人", diet: "無", family: "NICE", phone: "0935-264-151", email: "danny@octor.com.tw" },
+        { group: "7", name: "李旻彥", birthday: "12月15日", company: "科技業", title: "研發", diet: "不吃牛", family: "至聖先師", phone: "0911-923-839", email: "yen839@gmail.com" },
+
+        { group: "8", name: "劉桓毅", birthday: "02月07日", company: "Not in source", title: "專業投資人", diet: "無", family: "詩情話藝", phone: "0952-553-099", email: "Emba109.ntnu@gmail.com" },
+        { group: "8", name: "蔣治芬", birthday: "05月02日", company: "群創實際(股)", title: "負責人", diet: "不吃羊", family: "淡定大師", phone: "0929-800-200", email: "tiffiny.chiang@gmail.com" },
+        { group: "8", name: "林群弼", birthday: "06月06日", company: "申昌生化科技", title: "總經理", diet: "不吃牛/羊", family: "至聖先師", phone: "0932-869-555", email: "ted.cbl@gmail.com" },
+        { group: "8", name: "江秀梅", birthday: "07月16日", company: "中國醫藥大學", title: "教職", diet: "無", family: "師大大師", phone: "0952-199-125", email: "Pickycat716@gmail.com" },
+        { group: "8", name: "張建城", birthday: "07月24日", company: "元大投信", title: "協理", diet: "無", family: "NICE", phone: "0922-052-218", email: "jackc0724@gmail.com" },
+        { group: "8", name: "許玉真", birthday: "08月18日", company: "安心食品服務(股) 摩斯漢堡", title: "教育訓練部經理", diet: "無", family: "萬獸之王", phone: "0923-222-679", email: "jenny@mos.com.tw" },
+        { group: "8", name: "林再修", birthday: "08月31日", company: "上海商銀", title: "經理", diet: "無", family: "NICE", phone: "0921-433-933", email: "109590154@gapps.ntnu.edu.tw" },
+        { group: "8", name: "王柏棋", birthday: "09月25日", company: "Edwards Technologies Ltd.", title: "Service Manager", diet: "無", family: "獅子王", phone: "0932-237-073", email: "Paochyl@gmail.com" },
+        { group: "8", name: "許文齡", birthday: "10月28日", company: "享展科技(股)", title: "OIKID事業共同創辦人", diet: "無", family: "獅子王", phone: "0938-651-028", email: "s938651028@gmail.com" },
+        { group: "8", name: "郭亭廷", birthday: "11月08日", company: "富邦人壽", title: "業務經理", diet: "不吃牛", family: "師輩秀", phone: "0928-705-085", email: "Ting2@life.fubon.com" }
+    ];
+
+    function handleEnter(e) {
+        if (e.keyCode === 13) {
+            searchNetwork();
+            document.getElementById('keywordInput').blur();
+        }
+    }
+
+    // ★ 利他無我・銀行經理的高端提案引擎 ★
+    function getFinancialSuggestion(person) {
+        let title = person.title || "";
+        let company = person.company || "";
+        let suggestion = "";
+
+        if (title.includes("董事長") || title.includes("總經理") || title.includes("負責人") || title.includes("老板") || title.includes("執行長") || title.includes("創辦人") || title.includes("代表人") || title.includes("副總召")) {
+            suggestion = "身為企業領航者，我深知您的重擔。我的角色不只是提供<b>法人金融</b>與<b>優化公司金流</b>，更是守護您畢生心血的夥伴。透過量身打造的<b>家族信託與資產傳承規劃</b>，希望能協助您無後顧之憂地拓展事業版圖。";
+        } 
+        else if (title.includes("副總") || title.includes("處長") || title.includes("協理") || title.includes("總監") || title.includes("經理") || title.includes("副理") || title.includes("主管") || title.includes("財務長") || title.includes("Leader") || title.includes("lead") || title.includes("Manager")) {
+            suggestion = "對於您這樣的高階決策者，時間是最寶貴的資產。我能為您提供專屬的<b>高階財富管理</b>與 VIP 理財規劃，包含<b>節稅建議與尊榮菁英房貸專案</b>，讓您的個人資產穩健增值，專心在職場上發光發熱。";
+        } 
+        else if (title.includes("法務") || title.includes("資訊") || title.includes("研發") || title.includes("稽核") || title.includes("建築師") || title.includes("記者") || title.includes("IT")) {
+            suggestion = "您的職業需要高度專業與專注。在理財上，請放心交給我。我將為您規劃穩健的<b>被動收入配置、優利定存及專屬信貸方案</b>。幫您建構安心的財務防護網，讓您能專注於熱愛的專業領域。";
+        } 
+        else {
+            suggestion = "面對瞬息萬變的市場，您需要最靈活的財務支援。無論是<b>購屋、換車的優惠貸款</b>，或是<b>個人彈性資金存款與配置</b>，我都會為您爭取最優條件，成為您實現人生夢想的最佳後盾。";
+        }
+
+        let warmTip = `✨ <b>溫馨提示：</b> 留意到您的生日在 ${person.birthday}，在此提前祝您平安順心！`;
+        if (person.diet && person.diet !== "無") {
+            warmTip += `<br><br>💡 <b>邀約細節：</b> 我注意到您有「<span style="color:#fc8181;">${person.diet}</span>」的習慣，未來若有機會相約交流，我會為您精心挑選合適的頂級無牛/素食/專屬餐廳，讓您有最舒適的體驗。`;
+        } else {
+            warmTip += `<br><br>💡 <b>邀約細節：</b> 未來若有機會相約交流，希望能為您安排頂級的餐飲體驗，與您深談。`;
+        }
+
+        return `
+            <div class="proposal-box">
+                <div class="proposal-title">💎 VIP 利他專屬提案</div>
+                <p class="proposal-text">${suggestion}</p>
+                <div class="warm-tip">${warmTip}</div>
+            </div>
+        `;
+    }
+
+    function searchNetwork() {
+        let keyword = document.getElementById('keywordInput').value.trim();
+        const container = document.getElementById('resultsContainer');
+        container.innerHTML = ""; 
+
+        if (keyword === "") {
+            container.innerHTML = "<p style='text-align:center; color:#fc8181; font-weight:300;'>請輸入查詢關鍵字</p>";
+            return;
+        }
+
+        // 🏆 智慧組別轉換邏輯：將使用者可能輸入的「第一組」、「第1組」、「一組」統一轉換成內部資料庫的數字 "1" 等
+        let searchGroupNum = null;
+        const groupMapping = {
+            "第一組": "1", "一組": "1", "第1組": "1", "1組": "1", "1": "1",
+            "第二組": "2", "二組": "2", "第2組": "2", "2組": "2", "2": "2",
+            "第三組": "3", "三組": "3", "第3組": "3", "3組": "3", "3": "3",
+            "第四組": "4", "四組": "4", "第4組": "4", "4組": "4", "4": "4",
+            "第五組": "5", "五組": "5", "第5組": "5", "5組": "5", "5": "5",
+            "第六組": "6", "六組": "6", "第6組": "6", "6組": "6", "6": "6",
+            "第七組": "7", "七組": "7", "第7組": "7", "7組": "7", "7": "7",
+            "第八組": "8", "八組": "8", "第8組": "8", "8組": "8", "8": "8"
+        };
+        
+        if (groupMapping[keyword]) {
+            searchGroupNum = groupMapping[keyword];
+        }
+
+        const results = networkData.filter(person => 
+            // 只要符合「智慧組別」或原始輸入關鍵字包含於各欄位，就顯示該筆資料
+            (searchGroupNum && person.group === searchGroupNum) || 
+            (person.name && person.name.includes(keyword)) || 
+            (person.birthday && person.birthday.includes(keyword)) || 
+            (person.company && person.company.includes(keyword)) || 
+            (person.title && person.title.includes(keyword)) ||
+            (person.diet && person.diet.includes(keyword)) ||
+            (person.family && person.family.includes(keyword))
+        );
+
+        if (results.length === 0) {
+            container.innerHTML = `<p style="text-align:center; color:#718096; font-weight:300;">查無資料，請嘗試其他關鍵字</p>`;
+        } else {
+            container.innerHTML = `<p style="font-size:14px; color:#a0aec0; margin-bottom:15px; font-weight:300; letter-spacing:1px;">為您精準匹配 <b>${results.length}</b> 位尊榮客戶：</p>`;
+            
+            results.forEach(person => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <div class="card-header">
+                        <div class="card-name">${person.name}</div>
+                        <div class="card-group">第 ${person.group} 組</div>
+                    </div>
+                    
+                    <div class="tags-container">
+                        <span class="tag">🛡️ 家族：${person.family}</span>
+                        ${(person.diet !== "無") ? `<span class="tag tag-diet">🚫 飲食：${person.diet}</span>` : ""}
+                    </div>
+
+                    <div class="card-info">
+                        <span class="info-icon">🏢</span>
+                        <span>${person.company || '-'} / ${person.title || '-'}</span>
+                    </div>
+                    <div class="card-info">
+                        <span class="info-icon">📞</span>
+                        <a href="tel:${person.phone}">${person.phone}</a>
+                    </div>
+                    <div class="card-info">
+                        <span class="info-icon">✉️</span>
+                        <span>${person.email}</span>
+                    </div>
+
+                    ${getFinancialSuggestion(person)}
+                `;
+                container.appendChild(card);
+            });
+        }
+    }
+</script>
+
+</body>
+</html>
