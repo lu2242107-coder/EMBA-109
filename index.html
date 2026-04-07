@@ -64,7 +64,7 @@
         .home-btn { margin-top: 15px; margin-bottom: 25px; width: 100%; padding: 15px; background: rgba(212, 175, 55, 0.1); color: #FFDF00; border: 1px solid #D4AF37; border-radius: 10px; font-size: 15px; font-weight: bold; letter-spacing: 2px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.8); transition: 0.3s;}
         .home-btn:active { background: rgba(212, 175, 55, 0.2); }
         
-        /* 遠銀專屬卡片 */
+        /* 專屬發光卡片 (可點擊) */
         .feib-card { background: linear-gradient(145deg, #111, #000); border: 1px solid #D4AF37; border-radius: 16px; padding: 30px 20px; text-align: center; margin-bottom: 25px; box-shadow: 0 10px 20px rgba(0,0,0,0.8), inset 0 0 15px rgba(212, 175, 55, 0.1); transition: 0.3s; cursor: pointer;}
         .feib-card:active { transform: scale(0.98); }
         .feib-icon { font-size: 40px; margin-bottom: 15px; display: block;}
@@ -74,11 +74,11 @@
         /* 備註與小字 */
         .card-note { color: #8A733F; font-size: 12.5px; margin-top: 15px; line-height: 1.5; border-top: 1px dashed rgba(212, 175, 55, 0.3); padding-top: 10px; }
 
-        /* 底部導航 (四個按鈕) */
+        /* 底部導航 (5個按鈕微調) */
         .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(10, 8, 0, 0.95); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); display: flex; justify-content: space-around; align-items: center; border-top: 1.5px solid #AA771C; padding-bottom: env(safe-area-inset-bottom); z-index: 1000; box-shadow: 0 -5px 30px rgba(212, 175, 55, 0.2); }
-        .nav-item { flex: 1; text-align: center; padding: 12px 0; color: #8A733F; font-size: 12px; font-weight: 500; cursor: pointer; transition: 0.3s; letter-spacing: 1px; }
+        .nav-item { flex: 1; text-align: center; padding: 12px 0; color: #8A733F; font-size: 11.5px; font-weight: 500; cursor: pointer; transition: 0.3s; letter-spacing: 0.5px; }
         .nav-item.active { color: #FFDF00; font-weight: bold; background: linear-gradient(to top, rgba(212, 175, 55, 0.15) 0%, transparent 100%); text-shadow: 0 0 10px rgba(255, 223, 0, 0.5);}
-        .nav-icon { font-size: 20px; display: block; margin-bottom: 4px; }
+        .nav-icon { font-size: 18px; display: block; margin-bottom: 4px; }
         
         .toast { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(135deg, #D4AF37, #AA771C); color: #000; padding: 16px 30px; border-radius: 30px; font-size: 16px; font-weight: bold; box-shadow: 0 10px 30px rgba(0,0,0,0.9); display: none; z-index: 2000; letter-spacing: 2px; text-shadow: 0 1px 1px rgba(255,255,255,0.4);}
         a { color: #D4AF37; text-decoration: none; font-weight: bold; transition: color 0.3s;}
@@ -129,14 +129,12 @@
         <div class="subtitle" style="color:#FFDF00; font-size: 18px; font-weight: bold; text-shadow: 0 0 10px rgba(255,223,0,0.3);">✦ 遠東商銀 財富管理 ✦</div>
         <p style="text-align:center; color:#E8C37B; font-size:13.5px; margin-bottom: 25px; font-weight:300;">探索專屬於您與高階客戶的頂級理財與生活特權</p>
 
-        <!-- 家族 VIP -->
         <div class="feib-card" onclick="window.open('https://www.feib.com.tw/upload/family_vip/index.html', '_blank')">
             <span class="feib-icon">🏛️</span>
             <div class="feib-title">遠銀家族 VIP</div>
             <div class="feib-desc">傳承財富，守護家族榮耀。<br>為您與家人專屬打造的跨世代財富管理與禮遇計畫，點擊查看完整內容。</div>
         </div>
 
-        <!-- 星等權益 -->
         <div class="feib-card" onclick="window.open('https://www.feib.com.tw/L2?id=p32&focusid=type2&targetid=sp1', '_blank')">
             <span class="feib-icon">🌟</span>
             <div class="feib-title">貴賓星等權益</div>
@@ -181,6 +179,53 @@
         
         <p style="text-align:center; color:#8A733F; font-size:12px; margin-top:20px; font-weight:300;">* 詳細活動辦法、限制與跨境交易規範，請以遠銀官方最新公告為準。</p>
     </div>
+
+    <!-- 頁面 5：遠東集團 -->
+    <div id="page-feg" class="page">
+        <div class="subtitle" style="color:#FFDF00; font-size: 18px; font-weight: bold; text-shadow: 0 0 10px rgba(255,223,0,0.3);">✦ 遠東集團事業版圖 ✦</div>
+        <p style="text-align:center; color:#E8C37B; font-size:13.5px; margin-bottom: 25px; font-weight:300;">深耕台灣・橫跨九大產業的跨國集團</p>
+
+        <!-- 官網連結卡片 -->
+        <div class="feib-card" onclick="window.open('https://www.feg.com.tw/tw/about/profiles.aspx', '_blank')" style="background: linear-gradient(145deg, rgba(212, 175, 55, 0.15), rgba(0,0,0,0.9)); padding: 25px 20px;">
+            <span class="feib-icon">🌐</span>
+            <div class="feib-title" style="font-size: 18px;">遠東集團官方簡介</div>
+            <div class="feib-desc">點擊前往遠東集團官方網站<br>探索集團願景與完整事業藍圖。</div>
+        </div>
+
+        <!-- 產業版圖分類 -->
+        <div class="card">
+            <div class="card-header" style="border-bottom: 1px solid rgba(212, 175, 55, 0.4);">
+                <div class="card-name" style="font-size: 18px;">🛒 百貨零售與虛擬通路</div>
+            </div>
+            <div class="card-info"><span class="info-icon">🛍️</span><span>遠東SOGO百貨、遠東百貨、愛買</span></div>
+            <div class="card-info"><span class="info-icon">🏙️</span><span>Big City遠東巨城、遠東Garden City、遠企</span></div>
+            <div class="card-info"><span class="info-icon">📱</span><span>friDay購物、HAPPY GO (快樂購)</span></div>
+        </div>
+
+        <div class="card">
+            <div class="card-header" style="border-bottom: 1px solid rgba(212, 175, 55, 0.4);">
+                <div class="card-name" style="font-size: 18px;">🏦 金融服務與通訊網路</div>
+            </div>
+            <div class="card-info"><span class="info-icon">💳</span><span>遠東國際商業銀行、亞東證券、遠智證券</span></div>
+            <div class="card-info"><span class="info-icon">📡</span><span>遠傳電信、安源通訊 (Wifly)</span></div>
+        </div>
+
+        <div class="card">
+            <div class="card-header" style="border-bottom: 1px solid rgba(212, 175, 55, 0.4);">
+                <div class="card-name" style="font-size: 18px;">🚢 運輸觀光與工業製造</div>
+            </div>
+            <div class="card-info"><span class="info-icon">⛴️</span><span>裕民航運、香格里拉台北/台南遠東飯店</span></div>
+            <div class="card-info"><span class="info-icon">🏭</span><span>遠東新世紀、宏遠興業、東聯化學、亞東石化</span></div>
+            <div class="card-info"><span class="info-icon">🏗️</span><span>亞洲水泥、遠揚建設、遠揚營造</span></div>
+        </div>
+
+        <div class="card">
+            <div class="card-header" style="border-bottom: 1px solid rgba(212, 175, 55, 0.4);">
+                <div class="card-name" style="font-size: 18px;">🎓 教育與社會公益</div>
+            </div>
+            <div class="card-info"><span class="info-icon">🏫</span><span>元智大學、亞東科技大學、豫章工商</span></div>
+        </div>
+    </div>
 </div>
 
 <div class="bottom-nav">
@@ -195,6 +240,9 @@
     </div>
     <div class="nav-item" onclick="switchPage('page-card', this)">
         <span class="nav-icon">💳</span><span>刷卡優惠</span>
+    </div>
+    <div class="nav-item" onclick="switchPage('page-feg', this)">
+        <span class="nav-icon">🏢</span><span>遠東集團</span>
     </div>
 </div>
 
@@ -307,12 +355,13 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    // 【100%防呆修復】嚴格指定 parts 與 parts[2] 再執行取代
     function getZodiacInfo(birthdayStr) {
         if (!birthdayStr || !birthdayStr.includes('月')) return { name: "專屬星座", trait: "散發獨特魅力", wish: "願您在未來的日子裡萬事順心，好運連連！" };
         
         let parts = birthdayStr.split('月');
-        let m = parseInt(parts);
-        let d = (parts.length > 1) ? parseInt(parts.replace('日','')) : 1; 
+        let m = parseInt(parts, 10);
+        let d = (parts.length > 1) ? parseInt(parts[2].replace('日',''), 10) : 1; 
         
         if ((m == 3 && d >= 21) || (m == 4 && d <= 19)) return { name: "牡羊座", trait: "充滿熱情與無畏的行動力🔥", wish: "願您以無比的行動力，持續開創事業與財富的新版圖！" };
         if ((m == 4 && d >= 20) || (m == 5 && d <= 20)) return { name: "金牛座", trait: "務實可靠且具備卓越品味🌟", wish: "願您盡情享受高質感的生活，財富也能如您的步伐般穩健累積！" };
@@ -381,7 +430,7 @@
             } else {
                 suggestion = "面對瞬息萬變的市場，您需要靈活的財務支援。無論是<b>購屋換車的優惠貸款</b>，或<b>彈性資金存款配置</b>，我都會為您爭取最優條件。";
             }
-            let warmTip = `✨ <b>提示：</b> 生日(${person.birthday})即爬到來，別忘了獻上祝福。`;
+            let warmTip = `✨ <b>提示：</b> 生日(${person.birthday})即將到來，別忘了獻上祝福。`;
             if (person.diet && person.diet !== "無") {
                 warmTip += `<br>🍽️ <b>邀約細節：</b> 客戶「<span style="color:#FF8A8A; font-weight:bold;">${person.diet}</span>」，請提前預訂適合的頂級餐廳。`;
             }
@@ -448,6 +497,7 @@
         }
     }
 
+    // 【100%防呆修復】指定 parts[2] 取代日，再也不會有瀏覽器報錯！
     function loadCurrentMonthBirthdays() {
         const today = new Date();
         const currentMonthNum = today.getMonth() + 1; 
@@ -464,13 +514,13 @@
             if (a.birthday && a.birthday.includes('月')) {
                 let partsA = a.birthday.split('月');
                 if (partsA.length > 1) {
-                    dayA = parseInt(partsA.replace('日', '')) || 0;
+                    dayA = parseInt(partsA[2].replace('日', ''), 10) || 0;
                 }
             }
             if (b.birthday && b.birthday.includes('月')) {
                 let partsB = b.birthday.split('月');
                 if (partsB.length > 1) {
-                    dayB = parseInt(partsB.replace('日', '')) || 0;
+                    dayB = parseInt(partsB[2].replace('日', ''), 10) || 0;
                 }
             }
             return dayA - dayB; 
