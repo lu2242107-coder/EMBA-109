@@ -22,18 +22,16 @@
         .page.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
-        /* 多維度篩選區塊 */
+        /* 多維度即時聯動篩選區塊 */
         .filter-box { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 12px; padding: 15px; margin-bottom: 25px; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
-        .filters-row { display: flex; gap: 10px; margin-bottom: 12px; }
-        .filter-select { flex: 1; background: rgba(0, 0, 0, 0.2); color: #fff; border: 1px solid rgba(212, 175, 55, 0.5); border-radius: 8px; padding: 10px 5px; font-size: 14px; outline: none; appearance: none; text-align: center; }
+        .filter-label { color: #d4af37; font-size: 12px; margin-bottom: 8px; font-weight: bold; letter-spacing: 1px; display: block; }
+        .filters-row { display: flex; flex-direction: column; gap: 10px; margin-bottom: 12px; }
+        .filter-select { width: 100%; background: rgba(0, 0, 0, 0.3); color: #fff; border: 1px solid rgba(212, 175, 55, 0.6); border-radius: 8px; padding: 12px; font-size: 15px; outline: none; appearance: none; }
         .filter-select option { background: #082F49; color: #fff; }
         
-        /* 關鍵字搜尋列 */
-        .search-row { display: flex; gap: 10px; }
-        .search-input { flex: 1; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; background: rgba(0,0,0,0.2); padding: 12px; font-size: 15px; color: #fff; outline: none; letter-spacing: 1px; }
+        /* 關鍵字搜尋列 (即時反應) */
+        .search-input { width: 100%; box-sizing: border-box; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; background: rgba(0,0,0,0.2); padding: 15px; font-size: 15px; color: #fff; outline: none; letter-spacing: 1px; }
         .search-input::placeholder { color: #74899E; font-weight: 300; }
-        .search-btn { background: linear-gradient(135deg, #d4af37, #b58500); color: #000E28; border: none; border-radius: 8px; padding: 0 20px; font-size: 15px; font-weight: 600; cursor: pointer; transition: 0.3s; }
-        .search-btn:active { transform: scale(0.96); opacity: 0.9; }
 
         /* VIP 卡片 */
         .card { background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; padding: 22px; margin-bottom: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.5); position: relative; overflow: hidden; }
@@ -75,62 +73,62 @@
 <div id="toast" class="toast">✅ 已複製到剪貼簿！</div>
 
 <div class="app-content">
-    <!-- 頁面 1：尊榮搜尋頁 (支援多維度篩選) -->
+    <!-- 頁面 1：尊榮搜尋頁 (支援動態即時遞進篩選) -->
     <div id="page-search" class="page active">
         <div class="subtitle">以利他之心，成就他人藍圖</div>
         
         <div class="filter-box">
-            <!-- 雙層篩選：下拉選單區 -->
-            <div class="filters-row">
-                <select id="groupSelect" class="filter-select" onchange="searchNetwork()">
-                    <option value="all">所有組別</option>
-                    <option value="1">第 1 組</option><option value="2">第 2 組</option>
-                    <option value="3">第 3 組</option><option value="4">第 4 組</option>
-                    <option value="5">第 5 組</option><option value="6">第 6 組</option>
-                    <option value="7">第 7 組</option><option value="8">第 8 組</option>
-                </select>
-                <select id="monthSelect" class="filter-select" onchange="searchNetwork()">
-                    <option value="all">所有月份</option>
-                    <option value="01月">1 月</option><option value="02月">2 月</option>
-                    <option value="03月">3 月</option><option value="04月">4 月</option>
-                    <option value="05月">5 月</option><option value="06月">6 月</option>
-                    <option value="07月">7 月</option><option value="08月">8 月</option>
-                    <option value="09月">9 月</option><option value="10月">10 月</option>
-                    <option value="11月">11 月</option><option value="12月">12 月</option>
-                </select>
-                <select id="familySelect" class="filter-select" onchange="searchNetwork()">
-                    <option value="all">所有家族</option>
-                    <option value="一代宗師">一代宗師</option><option value="獅子頭">獅子頭</option>
-                    <option value="愛力獅">愛力獅</option><option value="師大大師">師大大師</option>
-                    <option value="NICE">NICE</option><option value="詩情話藝">詩情話藝</option>
-                    <option value="黃金獅">黃金獅</option><option value="獅子王">獅子王</option>
-                    <option value="至聖先師">至聖先師</option><option value="淡定大師">淡定大師</option>
-                    <option value="萬獸之王">萬獸之王</option><option value="師輩秀">師輩秀</option>
-                </select>
-            </div>
-            <!-- 關鍵字搜尋區 -->
-            <div class="search-row">
-                <input type="text" id="keywordInput" class="search-input" placeholder="可輸入姓名、公司、職稱..." onkeypress="handleEnter(event)">
-                <button class="search-btn" onclick="searchNetwork()">組合篩選</button>
-            </div>
+            <span class="filter-label">▼ 步驟 1：過濾組別</span>
+            <select id="groupSelect" class="filter-select" onchange="searchNetwork()" style="margin-bottom: 12px;">
+                <option value="all">不限組別 (顯示全部)</option>
+                <option value="1">第 1 組</option><option value="2">第 2 組</option>
+                <option value="3">第 3 組</option><option value="4">第 4 組</option>
+                <option value="5">第 5 組</option><option value="6">第 6 組</option>
+                <option value="7">第 7 組</option><option value="8">第 8 組</option>
+            </select>
+
+            <span class="filter-label">▼ 步驟 2：從結果過濾月份</span>
+            <select id="monthSelect" class="filter-select" onchange="searchNetwork()" style="margin-bottom: 12px;">
+                <option value="all">不限月份 (顯示全部)</option>
+                <option value="01月">1 月壽星</option><option value="02月">2 月壽星</option>
+                <option value="03月">3 月壽星</option><option value="04月">4 月壽星</option>
+                <option value="05月">5 月壽星</option><option value="06月">6 月壽星</option>
+                <option value="07月">7 月壽星</option><option value="08月">8 月壽星</option>
+                <option value="09月">9 月壽星</option><option value="10月">10 月壽星</option>
+                <option value="11月">11 月壽星</option><option value="12月">12 月壽星</option>
+            </select>
+
+            <span class="filter-label">▼ 步驟 3：從結果過濾家族</span>
+            <select id="familySelect" class="filter-select" onchange="searchNetwork()" style="margin-bottom: 15px;">
+                <option value="all">不限家族 (顯示全部)</option>
+                <option value="一代宗師">一代宗師</option><option value="獅子頭">獅子頭</option>
+                <option value="愛力獅">愛力獅</option><option value="師大大師">師大大師</option>
+                <option value="NICE">NICE</option><option value="詩情話藝">詩情話藝</option>
+                <option value="黃金獅">黃金獅</option><option value="獅子王">獅子王</option>
+                <option value="至聖先師">至聖先師</option><option value="淡定大師">淡定大師</option>
+                <option value="萬獸之王">萬獸之王</option><option value="師輩秀">師輩秀</option>
+            </select>
+
+            <span class="filter-label">▼ 或是直接輸入關鍵字 (即打即搜)</span>
+            <input type="text" id="keywordInput" class="search-input" placeholder="輸入姓名、公司、職稱或飲食..." oninput="searchNetwork()">
         </div>
 
         <div id="resultsContainer">
-            <p style="text-align:center; color:#74899E; font-size:15px; margin-top:50px; font-weight: 300; line-height: 1.6;">請設定上方組合條件，或輸入關鍵字<br>為您精準找出目標客戶</p>
+            <p style="text-align:center; color:#74899E; font-size:15px; margin-top:30px; font-weight: 300; line-height: 1.6;">請點選上方條件<br>系統將會即時為您過濾名單</p>
         </div>
     </div>
 
-    <!-- 頁面 2：本月壽星頁 (自動抓取月份並依日期排序) -->
+    <!-- 頁面 2：本月壽星頁 (已修復錯誤，並強制抓取全體名單進行日期排序) -->
     <div id="page-birthday" class="page">
-        <div class="subtitle" id="birthdayTitle" style="color:#d4af37; font-size: 16px; font-weight: 600;">✧ 本月專屬壽星 ✧</div>
-        <p style="text-align:center; color:#74899E; font-size:13px; margin-bottom: 25px;">為您呈獻本月份的關鍵時刻，已按日期先後排序</p>
+        <div class="subtitle" id="birthdayTitle" style="color:#d4af37; font-size: 16px; font-weight: 600;">✧ 本月全體壽星 ✧</div>
+        <p style="text-align:center; color:#74899E; font-size:13px; margin-bottom: 25px;">已為您撈取不限組別之當月壽星，並按日期排序</p>
         <div id="birthdayContainer"></div>
     </div>
 </div>
 
 <div class="bottom-nav">
     <div class="nav-item active" onclick="switchPage('page-search', this)" id="nav-search">
-        <span class="nav-icon">🔍</span><span>組合篩選</span>
+        <span class="nav-icon">🔍</span><span>遞進過濾</span>
     </div>
     <div class="nav-item" onclick="switchPage('page-birthday', this)">
         <span class="nav-icon">🥂</span><span>本月壽星</span>
@@ -138,7 +136,7 @@
 </div>
 
 <script>
-    // 依據學員資料表來源，收錄完整 74 筆名單 [3-15]
+    // 依據學員資料表來源，收錄完整 74 筆名單
     const networkData = [
         { group: "1", name: "謝端純", birthday: "01月15日", company: "遠東油脂(股)", title: "董事長", diet: "無", family: "一代宗師", phone: "0928-625-689", email: "duanchun.shieh@gmail.com" },
         { group: "1", name: "劉永嘯", birthday: "01月18日", company: "台灣大哥大", title: "IT", diet: "無", family: "獅子頭", phone: "0922-440-927", email: "ivanliu@gmail.com" },
@@ -238,7 +236,7 @@
         document.getElementById('familySelect').value = "all";
         document.getElementById('keywordInput').value = "";
         
-        document.getElementById('resultsContainer').innerHTML = `<p style="text-align:center; color:#74899E; font-size:15px; margin-top:50px; font-weight: 300; line-height: 1.6;">請設定上方組合條件，或輸入關鍵字<br>為您精準找出目標客戶</p>`;
+        document.getElementById('resultsContainer').innerHTML = `<p style="text-align:center; color:#74899E; font-size:15px; margin-top:30px; font-weight: 300; line-height: 1.6;">請點選上方條件<br>系統將會即時為您過濾名單</p>`;
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -250,11 +248,12 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function handleEnter(e) { if (e.keyCode === 13) { searchNetwork(); document.getElementById('keywordInput').blur(); } }
-
     function getZodiacInfo(birthdayStr) {
         let m = parseInt(birthdayStr.split('月'));
-        let d = parseInt(birthdayStr.split('月').replace('日',''));
+        // 修正了讀取「日」的防錯機制，避免讀取不到導致錯誤
+        let dStr = birthdayStr.split('月')[1]; 
+        let d = dStr ? parseInt(dStr.replace('日','')) : 1; 
+        
         if ((m == 3 && d >= 21) || (m == 4 && d <= 19)) return { name: "牡羊座", trait: "充滿熱情與無畏的行動力🔥", wish: "願您以無比的行動力，持續開創事業與財富的新版圖！" };
         if ((m == 4 && d >= 20) || (m == 5 && d <= 20)) return { name: "金牛座", trait: "務實可靠且具備卓越品味🌟", wish: "願您盡情享受高質感的生活，財富也能如您的步伐般穩健累積！" };
         if ((m == 5 && d >= 21) || (m == 6 && d <= 21)) return { name: "雙子座", trait: "靈活敏銳、才華洋溢💫", wish: "願您靈感不斷，精準掌握每一個市場新機，天天充滿驚喜！" };
@@ -357,7 +356,8 @@
         `;
     }
 
-    // ★ 多維度組合搜尋引擎 ★
+    // ★ 全新！動態聯動遞進過濾引擎 ★
+    // 特色：只要下拉選單一改變，或是文字框有輸入，立刻執行過濾，產生遞進效果！
     function searchNetwork() {
         const keyword = document.getElementById('keywordInput').value.trim();
         const selectedGroup = document.getElementById('groupSelect').value;
@@ -366,26 +366,22 @@
         const container = document.getElementById('resultsContainer');
         container.innerHTML = ""; 
 
-        // 若無任何設定則顯示初始畫面
+        // 若沒有任何條件，顯示初始畫面
         if (keyword === "" && selectedGroup === "all" && selectedMonth === "all" && selectedFamily === "all") { 
-            container.innerHTML = "<p style='text-align:center; color:#74899E; font-weight:300;'>請設定上方組合條件，或輸入關鍵字<br>為您精準找出目標客戶</p>"; 
+            container.innerHTML = "<p style='text-align:center; color:#74899E; font-size:15px; margin-top:30px; font-weight: 300; line-height: 1.6;'>請點選上方條件<br>系統將會即時為您過濾名單</p>"; 
             return; 
         }
 
-        // 精準多重篩選邏輯
+        // 精準遞進篩選：必須同時符合「組別」+「月份」+「家族」+「關鍵字」
         const results = networkData.filter(person => {
             let match = true;
 
-            // 1. 組別篩選
             if (selectedGroup !== "all" && person.group !== selectedGroup) match = false;
             
-            // 2. 月份篩選 (比對是否以該月份開頭)
             if (selectedMonth !== "all" && !person.birthday.startsWith(selectedMonth)) match = false;
             
-            // 3. 家族篩選
             if (selectedFamily !== "all" && person.family !== selectedFamily) match = false;
 
-            // 4. 關鍵字篩選 (比對姓名、公司、職稱、飲食)
             if (match && keyword !== "") {
                 const keywordMatch = 
                     (person.name && person.name.includes(keyword)) || 
@@ -398,34 +394,37 @@
             return match;
         });
 
-        // 呈現結果
+        // 呈現過濾後的結果
         if (results.length === 0) {
-            container.innerHTML = `<p style="text-align:center; color:#ff6b6b; font-weight:300;">查無相符資料，請嘗試放寬篩選條件</p>`;
+            container.innerHTML = `<p style="text-align:center; color:#ff6b6b; font-weight:300;">查無相符資料，請嘗試放寬過濾條件</p>`;
         } else {
-            container.innerHTML = `<p style="font-size:14px; color:#BAE6FD; margin-bottom:15px; font-weight:300; letter-spacing:1px;">為您精準匹配 <b>${results.length}</b> 位尊榮客戶：</p>`;
+            container.innerHTML = `<p style="font-size:14px; color:#BAE6FD; margin-bottom:15px; font-weight:300; letter-spacing:1px;">為您過濾出 <b>${results.length}</b> 位尊榮客戶：</p>`;
             results.forEach((person, idx) => { container.innerHTML += createPersonCardHTML(person, false, idx); });
-            container.innerHTML += `<button class="home-btn" onclick="goToHome()">🏠 重置條件 / 回首頁</button>`;
+            container.innerHTML += `<button class="home-btn" onclick="goToHome()">🏠 清除過濾條件</button>`;
         }
     }
 
-    // ★ 嚴格日期排序本月壽星 ★
+    // ★ 錯誤已修復！從全體名單嚴格日期排序本月壽星 ★
     function loadCurrentMonthBirthdays() {
         const today = new Date();
-        const currentMonthNum = today.getMonth() + 1;
+        const currentMonthNum = today.getMonth() + 1; // 抓取現在真實月份
         const currentMonthStr = String(currentMonthNum).padStart(2, '0') + '月';
         
         document.getElementById('birthdayTitle').innerText = `✧ ${currentMonthStr} 專屬壽星 ✧`;
         const container = document.getElementById('birthdayContainer');
         container.innerHTML = "";
 
-        // 篩選出開頭為本月的同學
+        // 步驟 1：不分組別、不分家族，從全體 networkData 抓出該月份的同學
         let monthBirthdays = networkData.filter(person => person.birthday && person.birthday.startsWith(currentMonthStr));
 
-        // 依據 "日" 的數字從小到大嚴格排序
+        // 步驟 2：修正了字串拆解的 Bug，嚴格依據 "日" 從 1 號排到 31 號
         monthBirthdays.sort((a, b) => {
-            let dayA = parseInt(a.birthday.split('月')[16].replace('日', ''));
-            let dayB = parseInt(b.birthday.split('月')[16].replace('日', ''));
-            return dayA - dayB;
+            // 讀取「XX月YY日」後面的「YY」並轉換為純數字
+            let dStrA = a.birthday.split('月')[1];
+            let dStrB = b.birthday.split('月')[1];
+            let dayA = dStrA ? parseInt(dStrA.replace('日', '')) : 0;
+            let dayB = dStrB ? parseInt(dStrB.replace('日', '')) : 0;
+            return dayA - dayB; // 升冪排列 (小到大)
         });
 
         if (monthBirthdays.length === 0) {
