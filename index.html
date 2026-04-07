@@ -11,7 +11,6 @@
 
     <title>Private Wealth | VIP 財富人脈系統</title>
     <style>
-        /* 頂級私人財富管理風格：深海藍搭配香檳金 */
         body { margin: 0; padding: 0; font-family: "Helvetica Neue", Arial, "微軟正黑體", sans-serif; background: linear-gradient(135deg, #082F49 0%, #000E28 100%); color: #e0e1dd; -webkit-tap-highlight-color: transparent; min-height: 100vh; }
         .app-header { position: fixed; top: 0; left: 0; width: 100%; background: rgba(8, 47, 73, 0.95); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); color: #d4af37; text-align: center; padding: 22px 0; font-size: 20px; font-weight: 300; letter-spacing: 3px; border-bottom: 1px solid rgba(212, 175, 55, 0.2); z-index: 1000; user-select: none; cursor: pointer; transition: 0.3s; }
         .app-header:active { background: rgba(8, 47, 73, 1); }
@@ -22,22 +21,15 @@
         .page.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
-        /* 首頁多維度篩選 - 手機優化版直列設計 */
         .filter-box { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 12px; padding: 20px 15px; margin-bottom: 25px; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
-        
-        /* 強制垂直排列的容器 */
         .filter-group { display: flex; flex-direction: column; margin-bottom: 16px; }
         .filter-group:last-child { margin-bottom: 0; }
-        
         .filter-label { color: #d4af37; font-size: 13px; margin-bottom: 8px; font-weight: bold; letter-spacing: 1px; }
         .filter-select { width: 100%; background: rgba(0, 0, 0, 0.3); color: #fff; border: 1px solid rgba(212, 175, 55, 0.6); border-radius: 8px; padding: 14px 12px; font-size: 15px; outline: none; appearance: none; }
         .filter-select option { background: #082F49; color: #fff; }
-        
-        /* 關鍵字搜尋列 */
         .search-input { width: 100%; box-sizing: border-box; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; background: rgba(0,0,0,0.2); padding: 14px 12px; font-size: 15px; color: #fff; outline: none; letter-spacing: 1px; }
         .search-input::placeholder { color: #74899E; font-weight: 300; }
 
-        /* VIP 卡片 */
         .card { background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; padding: 22px; margin-bottom: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.5); position: relative; overflow: hidden; }
         .card::before { content: ""; position: absolute; left: 0; top: 0; height: 100%; width: 4px; background: linear-gradient(to bottom, #d4af37, #b58500); }
         .card-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding-bottom: 12px; margin-bottom: 15px; }
@@ -50,7 +42,6 @@
         .tag-diet { background: rgba(229, 62, 62, 0.15); color: #ff6b6b; border-color: rgba(229, 62, 62, 0.3); }
         .tag-birthday { background: rgba(212, 175, 55, 0.2); color: #f6e05e; border-color: rgba(212, 175, 55, 0.5); font-weight: bold; }
         
-        /* 提案與祝福區塊 */
         .proposal-box { margin-top: 20px; background: rgba(212, 175, 55, 0.05); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 12px; padding: 18px; }
         .proposal-title { font-size: 14px; font-weight: 600; color: #d4af37; margin-bottom: 10px; letter-spacing: 1px; display: flex; align-items: center;}
         .proposal-title::before { content: "✧"; margin-right: 6px; font-size: 16px; }
@@ -61,7 +52,6 @@
         .copy-btn { margin-top: 10px; width: 100%; padding: 12px; background: #22C55E; color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: bold; cursor: pointer; transition: 0.3s; }
         .copy-btn:active { background: #16a34a; }
         
-        /* 導覽與輔助 */
         .home-btn { margin-top: 10px; margin-bottom: 20px; width: 100%; padding: 14px; background: rgba(212, 175, 55, 0.08); color: #d4af37; border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 10px; font-size: 15px; font-weight: bold; letter-spacing: 1px; cursor: pointer; }
         .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(8, 47, 73, 0.95); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); display: flex; justify-content: space-around; align-items: center; border-top: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: env(safe-area-inset-bottom); z-index: 1000; }
         .nav-item { flex: 1; text-align: center; padding: 16px 0; color: #74899E; font-size: 13px; font-weight: 400; cursor: pointer; transition: 0.3s; }
@@ -77,7 +67,7 @@
 <div id="toast" class="toast">✅ 已複製到剪貼簿！</div>
 
 <div class="app-content">
-    <!-- 頁面 1：尊榮搜尋頁 (手機版直列下拉選單設計) -->
+    <!-- 頁面 1：尊榮搜尋頁 -->
     <div id="page-search" class="page active">
         <div class="subtitle">以利他之心，成就他人藍圖</div>
         
@@ -148,7 +138,6 @@
 </div>
 
 <script>
-    // 依據學員資料表來源，收錄完整 74 筆名單
     const networkData = [
         { group: "1", name: "謝端純", birthday: "01月15日", company: "遠東油脂(股)", title: "董事長", diet: "無", family: "一代宗師", phone: "0928-625-689", email: "duanchun.shieh@gmail.com" },
         { group: "1", name: "劉永嘯", birthday: "01月18日", company: "台灣大哥大", title: "IT", diet: "無", family: "獅子頭", phone: "0922-440-927", email: "ivanliu@gmail.com" },
@@ -182,7 +171,7 @@
         { group: "3", name: "陳進賢", birthday: "11月18日", company: "歐立威科技", title: "技術協理", diet: "無", family: "師大大師", phone: "0916-805-975", email: "alexcl68@gmail.com" },
 
         { group: "4", name: "陳泓銘", birthday: "01月27日", company: "台灣妙管家(股)", title: "法務主管", diet: "無", family: "一代宗師", phone: "0910-339-588", email: "theanan0127@hotmail.com" },
-        { group: "4", name: "任啟綱", birthday: "06月06日", company: "綠光能數位(有)", title: "業務行銷", diet: "無", family: "黃金獅", phone: "0936-225-504", email: "ckjen@gsld.com.tw" },
+        { group: "4", name: "任啟綱", birthday: "06月06日", company: "綠光能數位(有)", title: "業務行 সভাপ", diet: "無", family: "黃金獅", phone: "0936-225-504", email: "ckjen@gsld.com.tw" },
         { group: "4", name: "何玉珊", birthday: "06月13日", company: "國泰人壽", title: "銀行保險代理", diet: "無", family: "詩情話藝", phone: "0963-177-897", email: "ddo_obb@hotmail.com" },
         { group: "4", name: "葉宗源", birthday: "06月15日", company: "戴爾電腦科技(股)", title: "硬體研發經理", diet: "無", family: "愛力獅", phone: "0928-066-057", email: "billyeh1119@gmail.com" },
         { group: "4", name: "林宸甄", birthday: "10月29日", company: "立榮航空", title: "副課長", diet: "不吃牛/羊", family: "愛力獅", phone: "0988-093-962", email: "angelalin@uniair.com.tw" },
@@ -258,10 +247,14 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    // ★ 徹底修正：完全修復陣列導致崩潰的問題 ★
     function getZodiacInfo(birthdayStr) {
-        let m = parseInt(birthdayStr.split('月'));
-        let dStr = birthdayStr.split('月'); 
-        let d = dStr ? parseInt(dStr[2].replace('日','')) : 1; 
+        if (!birthdayStr || !birthdayStr.includes('月')) return { name: "專屬星座", trait: "散發獨特魅力", wish: "願您在未來的日子裡萬事順心，好運連連！" };
+        
+        let parts = birthdayStr.split('月');
+        let m = parseInt(parts);
+        // 修正：必須先指定陣列內的字串 [1] 才能呼叫 .replace
+        let d = parseInt(parts[1].replace('日','')); 
         
         if ((m == 3 && d >= 21) || (m == 4 && d <= 19)) return { name: "牡羊座", trait: "充滿熱情與無畏的行動力🔥", wish: "願您以無比的行動力，持續開創事業與財富的新版圖！" };
         if ((m == 4 && d >= 20) || (m == 5 && d <= 20)) return { name: "金牛座", trait: "務實可靠且具備卓越品味🌟", wish: "願您盡情享受高質感的生活，財富也能如您的步伐般穩健累積！" };
@@ -286,6 +279,8 @@
     }
 
     function generateLINEBlessing(person) {
+        if (!person.birthday || !person.birthday.includes('月')) return "親愛的客戶您好，祝福您平安順心！";
+        
         let m = parseInt(person.birthday.split('月'));
         let zInfo = getZodiacInfo(person.birthday);
         let hook = getHistoricalHook(m);
@@ -320,7 +315,7 @@
             let textId = `blessing-${index}`;
             lineBlessingBlock = `
                 <div class="line-blessing">
-                    <div class="line-title">💬 LINE 專屬客製祝福 (長官得體版自動切換)</div>
+                    <div class="line-title">💬 LINE 專屬客製祝福</div>
                     <div class="line-text" id="${textId}">${blessingText}</div>
                     <button class="copy-btn" onclick="copyToClipboard('${textId}')">一鍵複製祝福語 📋</button>
                 </div>
@@ -410,7 +405,7 @@
         }
     }
 
-    // ★ 最終修正版：確保陣列正確取值，徹底解決畫面當機問題 ★
+    // ★ 最終陣列修復：完美讀取日期並正確排序 ★
     function loadCurrentMonthBirthdays() {
         const today = new Date();
         const currentMonthNum = today.getMonth() + 1; 
@@ -422,12 +417,12 @@
 
         let monthBirthdays = networkData.filter(person => person.birthday && person.birthday.startsWith(currentMonthStr));
 
-        // 徹底修正此處抓取「日」的邏輯，使用 parts[2] 取代錯誤的 parts.replace
+        // 徹底修正：指定 parts[1] 取出包含「日」的字串後才做取代
         monthBirthdays.sort((a, b) => {
             let partsA = a.birthday.split('月');
             let partsB = b.birthday.split('月');
-            let dayA = (partsA.length > 1) ? parseInt(partsA[2].replace('日', '')) : 0;
-            let dayB = (partsB.length > 1) ? parseInt(partsB[2].replace('日', '')) : 0;
+            let dayA = (partsA.length > 1) ? parseInt(partsA[1].replace('日', '')) : 0;
+            let dayB = (partsB.length > 1) ? parseInt(partsB[1].replace('日', '')) : 0;
             return dayA - dayB; 
         });
 
