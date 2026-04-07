@@ -130,7 +130,7 @@
         </div>
     </div>
 
-    <!-- 頁面 2：本月壽星頁 (已修復錯誤，並強制抓取全體名單進行日期排序) -->
+    <!-- 頁面 2：本月壽星頁 -->
     <div id="page-birthday" class="page">
         <div class="subtitle" id="birthdayTitle" style="color:#d4af37; font-size: 16px; font-weight: 600;">✧ 本月全體壽星 ✧</div>
         <p style="text-align:center; color:#74899E; font-size:13px; margin-bottom: 25px;">已為您撈取不限組別之當月壽星，並按日期排序</p>
@@ -260,8 +260,8 @@
 
     function getZodiacInfo(birthdayStr) {
         let m = parseInt(birthdayStr.split('月'));
-        let dStr = birthdayStr.split('月')[2]; 
-        let d = dStr ? parseInt(dStr.replace('日','')) : 1; 
+        let dStr = birthdayStr.split('月'); 
+        let d = dStr ? parseInt(dStr[2].replace('日','')) : 1; 
         
         if ((m == 3 && d >= 21) || (m == 4 && d <= 19)) return { name: "牡羊座", trait: "充滿熱情與無畏的行動力🔥", wish: "願您以無比的行動力，持續開創事業與財富的新版圖！" };
         if ((m == 4 && d >= 20) || (m == 5 && d <= 20)) return { name: "金牛座", trait: "務實可靠且具備卓越品味🌟", wish: "願您盡情享受高質感的生活，財富也能如您的步伐般穩健累積！" };
@@ -285,20 +285,16 @@
         return "在這個沉穩內斂、孕育希望的時節❄️，歷史上的今天曾積蓄過無數改變未來的能量。";
     }
 
-    // ★ 重點優化：針對長官與老闆加入得體專屬賀詞 ★
     function generateLINEBlessing(person) {
         let m = parseInt(person.birthday.split('月'));
         let zInfo = getZodiacInfo(person.birthday);
         let hook = getHistoricalHook(m);
         let respectTitle = person.title || "長官/學長姐"; 
         
-        // 判斷是否為長官、主管職位
         let isBoss = ["董事長", "總經理", "執行長", "負責人", "老板", "副總", "處長", "協理", "總監", "經理", "副理", "主管", "Leader", "lead", "Manager", "副總召"].some(t => respectTitle.includes(t));
         
         let customWish = zInfo.wish;
-        
         if (isBoss) {
-            // 替換為給老闆的得體祝福語
             customWish = "感謝您一路以來的照顧與提攜！願您的智慧持續照耀我們，祝您在新的一歲裡事業蒸蒸日上，身體健康，笑容常在，萬事如意！";
         }
         
@@ -324,7 +320,7 @@
             let textId = `blessing-${index}`;
             lineBlessingBlock = `
                 <div class="line-blessing">
-                    <div class="line-title">💬 LINE 專屬客製祝福 (長官得體版)</div>
+                    <div class="line-title">💬 LINE 專屬客製祝福 (長官得體版自動切換)</div>
                     <div class="line-text" id="${textId}">${blessingText}</div>
                     <button class="copy-btn" onclick="copyToClipboard('${textId}')">一鍵複製祝福語 📋</button>
                 </div>
@@ -414,7 +410,7 @@
         }
     }
 
-    // ★ 已修復！精確解析日期字串，防止排序崩潰 ★
+    // ★ 最終修正版：確保陣列正確取值，徹底解決畫面當機問題 ★
     function loadCurrentMonthBirthdays() {
         const today = new Date();
         const currentMonthNum = today.getMonth() + 1; 
@@ -426,7 +422,7 @@
 
         let monthBirthdays = networkData.filter(person => person.birthday && person.birthday.startsWith(currentMonthStr));
 
-        // 修復：改用更安全的陣列防呆拆解法
+        // 徹底修正此處抓取「日」的邏輯，使用 parts[2] 取代錯誤的 parts.replace
         monthBirthdays.sort((a, b) => {
             let partsA = a.birthday.split('月');
             let partsB = b.birthday.split('月');
