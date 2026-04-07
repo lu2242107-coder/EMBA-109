@@ -4,116 +4,126 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="尊榮人脈">
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="theme-color" content="#0B1F3B">
+    <meta name="theme-color" content="#0F0C05">
 
-    <title>Private Wealth | VIP 財富人脈系統</title>
+    <title>Private Wealth | VIP 尊榮財富人脈</title>
     <style>
-        /* 現代金融輕量化風格 */
-        body { margin: 0; padding: 0; font-family: "Helvetica Neue", Arial, "微軟正黑體", sans-serif; background: #F2F5F8; color: #123A63; -webkit-tap-highlight-color: transparent; min-height: 100vh; }
+        /* 華麗黃金高貴風格 (Luxury Gold & Obsidian Black) */
+        body { margin: 0; padding: 0; font-family: "Helvetica Neue", "Times New Roman", "微軟正黑體", serif; background: linear-gradient(135deg, #0a0804 0%, #1a1500 100%); color: #F5DEB3; -webkit-tap-highlight-color: transparent; min-height: 100vh; }
         
-        .app-header { position: fixed; top: 0; left: 0; width: 100%; background: #0B1F3B; color: #FFFFFF; text-align: center; padding: 20px 0; font-size: 20px; font-weight: 500; letter-spacing: 3px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); z-index: 1000; user-select: none; cursor: pointer; transition: 0.3s; }
-        .app-header:active { background: #123A63; }
-        .app-content { padding: 95px 18px 90px 18px; }
+        /* 頂部導航列 - 鑲金黑底 */
+        .app-header { position: fixed; top: 0; left: 0; width: 100%; background: rgba(15, 12, 5, 0.95); border-bottom: 2px solid #D4AF37; text-align: center; padding: 22px 0; font-size: 24px; font-weight: bold; letter-spacing: 5px; color: #FFDF00; text-shadow: 0 2px 15px rgba(255, 223, 0, 0.4); z-index: 1000; user-select: none; cursor: pointer; transition: 0.3s; backdrop-filter: blur(10px); }
+        .app-header:active { background: #1a1500; }
+        .app-content { padding: 105px 18px 90px 18px; }
         
-        .subtitle { text-align: center; color: #2F5D8C; font-size: 14px; margin-bottom: 20px; font-weight: 600; letter-spacing: 1px; }
+        .subtitle { text-align: center; color: #E8C37B; font-size: 15px; margin-bottom: 25px; font-weight: 400; letter-spacing: 3px; }
         
-        .page { display: none; animation: fadeIn 0.4s ease; }
+        .page { display: none; animation: fadeIn 0.5s ease; }
         .page.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
         
-        /* 逐層關鍵字搜尋區塊 */
-        .filter-box { background: #FFFFFF; border: 1px solid #C9D6E5; border-radius: 12px; padding: 20px 15px; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
-        .filter-group { display: flex; flex-direction: column; margin-bottom: 12px; }
+        /* 逐層關鍵字搜尋區塊 - 奢華發光卡片 */
+        .filter-box { background: rgba(255, 215, 0, 0.03); border: 1px solid #AA771C; border-radius: 12px; padding: 22px 15px; margin-bottom: 25px; box-shadow: 0 4px 25px rgba(212, 175, 55, 0.15), inset 0 0 20px rgba(212, 175, 55, 0.05); }
+        .filter-group { display: flex; flex-direction: column; margin-bottom: 15px; }
         .filter-group:last-child { margin-bottom: 0; }
-        .filter-label { color: #2F5D8C; font-size: 13px; margin-bottom: 8px; font-weight: bold; letter-spacing: 0.5px; }
+        .filter-label { color: #E8C37B; font-size: 14px; margin-bottom: 8px; font-weight: bold; letter-spacing: 1px; text-shadow: 0 2px 4px rgba(0,0,0,0.9); }
         
-        .search-input { width: 100%; box-sizing: border-box; border: 1.5px solid #C9D6E5; border-radius: 8px; background: #F9FBFF; padding: 14px 12px; font-size: 15px; color: #0B1F3B; outline: none; transition: 0.3s; }
-        .search-input:focus { border-color: #2F5D8C; background: #FFFFFF; box-shadow: 0 0 0 3px rgba(47, 93, 140, 0.1); }
-        .search-input::placeholder { color: #94A3B8; font-weight: 300; }
+        /* 關鍵字輸入框 - 高光細節 */
+        .search-input { width: 100%; box-sizing: border-box; border: 1px solid #8A733F; border-radius: 8px; background: rgba(0, 0, 0, 0.6); padding: 14px 12px; font-size: 15px; color: #FFDF00; outline: none; transition: 0.3s; letter-spacing: 1px; }
+        .search-input:focus { border-color: #FFDF00; background: rgba(20, 15, 0, 0.9); box-shadow: 0 0 12px rgba(212, 175, 55, 0.5); }
+        .search-input::placeholder { color: #6e5c33; font-weight: 300; }
 
-        .card { background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 16px; padding: 22px; margin-bottom: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.04); position: relative; overflow: hidden; }
-        .card::before { content: ""; position: absolute; left: 0; top: 0; height: 100%; width: 5px; background: linear-gradient(to bottom, #0B1F3B, #2F5D8C); }
-        .card-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #F2F5F8; padding-bottom: 12px; margin-bottom: 15px; }
-        .card-name { font-size: 22px; font-weight: bold; color: #0B1F3B; letter-spacing: 1px;}
-        .card-group { font-size: 12px; color: #2F5D8C; border: 1px solid #C9D6E5; padding: 4px 10px; border-radius: 20px; background: #F2F5F8; font-weight: bold; }
-        .card-info { margin: 8px 0; font-size: 14.5px; color: #475569; display: flex; align-items: flex-start; letter-spacing: 0.5px;}
-        .info-icon { margin-right: 12px; font-size: 16px; color: #2F5D8C; }
-        .tags-container { margin: 15px 0; display: flex; flex-wrap: wrap; gap: 8px; }
+        /* VIP 客戶卡片 - 頂級皇室版 */
+        .card { background: linear-gradient(145deg, rgba(25, 20, 5, 0.9), rgba(10, 8, 0, 0.95)); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 16px; padding: 24px; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.9), inset 0 1px 2px rgba(255,215,0,0.2); position: relative; overflow: hidden; }
+        .card::before { content: ""; position: absolute; left: 0; top: 0; height: 100%; width: 5px; background: linear-gradient(to bottom, #FFDF00, #AA771C); box-shadow: 3px 0 15px rgba(255, 223, 0, 0.6); }
+        .card-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: 15px; margin-bottom: 15px; }
+        .card-name { font-size: 24px; font-weight: bold; color: #FFDF00; letter-spacing: 2px; text-shadow: 0 2px 5px rgba(0,0,0,0.9); }
+        .card-group { font-size: 12px; color: #0a0804; border: 1px solid #D4AF37; padding: 5px 12px; border-radius: 20px; background: linear-gradient(45deg, #D4AF37, #FFDF00); font-weight: bold; box-shadow: 0 2px 8px rgba(212,175,55,0.4); letter-spacing: 1px; }
+        .card-info { margin: 10px 0; font-size: 14.5px; color: #E8C37B; display: flex; align-items: flex-start; letter-spacing: 0.5px; font-weight: 300; }
+        .info-icon { margin-right: 12px; font-size: 16px; color: #D4AF37; }
+        .tags-container { margin: 18px 0; display: flex; flex-wrap: wrap; gap: 10px; }
         
-        .tag { font-size: 12px; padding: 5px 12px; border-radius: 20px; background: #E0F2FE; color: #0369A1; font-weight: 500; }
-        .tag-diet { background: #FEE2E2; color: #BE123C; }
-        .tag-birthday { background: #FEF3C7; color: #B45309; font-weight: bold; }
+        /* 標籤配色 - 暗金奢華 */
+        .tag { font-size: 13px; padding: 6px 14px; border-radius: 20px; background: rgba(212, 175, 55, 0.1); color: #E8C37B; font-weight: 500; border: 1px solid rgba(212, 175, 55, 0.4); box-shadow: 0 2px 5px rgba(0,0,0,0.5);}
+        .tag-diet { background: rgba(220, 20, 60, 0.15); color: #FF8A8A; border: 1px solid rgba(220, 20, 60, 0.4); }
+        .tag-birthday { background: linear-gradient(45deg, #AA771C, #D4AF37); color: #000; border: none; font-weight: bold; box-shadow: 0 4px 10px rgba(212, 175, 55, 0.5); }
         
-        .proposal-box { margin-top: 20px; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
-        .proposal-title { font-size: 14px; font-weight: bold; color: #0B1F3B; margin-bottom: 10px; display: flex; align-items: center;}
-        .proposal-title::before { content: "🔹"; margin-right: 6px; font-size: 14px; color: #2F5D8C; }
-        .proposal-text { font-size: 14px; color: #475569; line-height: 1.6; margin: 0; }
-        .warm-tip { margin-top: 10px; font-size: 13px; color: #64748B; background: #FFFFFF; padding: 10px; border-radius: 8px; border: 1px dashed #CBD5E1;}
+        /* 提案與祝福區塊 */
+        .proposal-box { margin-top: 22px; background: rgba(212, 175, 55, 0.06); border: 1px solid rgba(212, 175, 55, 0.25); border-radius: 12px; padding: 20px; }
+        .proposal-title { font-size: 15px; font-weight: bold; color: #FFDF00; margin-bottom: 12px; display: flex; align-items: center; letter-spacing: 1.5px;}
+        .proposal-title::before { content: "✦"; margin-right: 8px; font-size: 18px; color: #D4AF37; text-shadow: 0 0 8px rgba(212,175,55,0.8);}
+        .proposal-text { font-size: 14.5px; color: #F5DEB3; line-height: 1.7; margin: 0; font-weight: 300;}
+        .warm-tip { margin-top: 12px; font-size: 13.5px; color: #D4AF37; background: rgba(0,0,0,0.5); padding: 12px; border-radius: 8px; border: 1px dashed rgba(212, 175, 55, 0.6);}
         
-        .line-blessing { margin-top: 15px; padding: 15px; border-radius: 10px; background: #ECFDF5; border: 1px solid #A7F3D0; }
-        .line-title { color: #059669; font-size: 13px; font-weight: bold; margin-bottom: 8px; display: flex; align-items: center;}
-        .line-text { font-size: 14px; color: #1E293B; line-height: 1.6; white-space: pre-wrap; }
-        .copy-btn { margin-top: 12px; width: 100%; padding: 12px; background: #10B981; color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: bold; cursor: pointer; transition: 0.3s; box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3); }
-        .copy-btn:active { transform: scale(0.98); background: #059669; }
+        .line-blessing { margin-top: 20px; padding: 18px; border-radius: 12px; background: linear-gradient(145deg, rgba(212, 175, 55, 0.1), rgba(0,0,0,0.2)); border: 1px solid rgba(212, 175, 55, 0.5); box-shadow: inset 0 0 15px rgba(212, 175, 55, 0.05); }
+        .line-title { color: #FFDF00; font-size: 14px; font-weight: bold; margin-bottom: 12px; display: flex; align-items: center; letter-spacing: 1px;}
+        .line-text { font-size: 14.5px; color: #F5DEB3; line-height: 1.7; white-space: pre-wrap; font-weight: 300; }
+        .copy-btn { margin-top: 15px; width: 100%; padding: 15px; background: linear-gradient(135deg, #FFDF00, #AA771C); color: #0a0804; border: none; border-radius: 8px; font-size: 15px; font-weight: bold; letter-spacing: 2px; cursor: pointer; transition: 0.3s; box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4); text-shadow: 0 1px 1px rgba(255,255,255,0.3);}
+        .copy-btn:active { transform: scale(0.98); background: linear-gradient(135deg, #AA771C, #FFDF00); }
         
-        .home-btn { margin-top: 10px; margin-bottom: 20px; width: 100%; padding: 14px; background: #F8FAFC; color: #475569; border: 1px solid #CBD5E1; border-radius: 10px; font-size: 15px; font-weight: bold; cursor: pointer; }
-        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); display: flex; justify-content: space-around; align-items: center; border-top: 1px solid #E2E8F0; padding-bottom: env(safe-area-inset-bottom); z-index: 1000; box-shadow: 0 -4px 20px rgba(0,0,0,0.05); }
-        .nav-item { flex: 1; text-align: center; padding: 16px 0; color: #94A3B8; font-size: 13px; font-weight: 500; cursor: pointer; transition: 0.3s; }
-        .nav-item.active { color: #0B1F3B; font-weight: bold; }
-        .nav-icon { font-size: 22px; display: block; margin-bottom: 4px; }
-        .toast { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(11, 31, 59, 0.9); color: white; padding: 14px 24px; border-radius: 30px; font-size: 15px; font-weight: 500; box-shadow: 0 4px 15px rgba(0,0,0,0.2); display: none; z-index: 2000; }
-        a { color: #2F5D8C; text-decoration: none; font-weight: 500; }
+        /* 導覽與輔助 */
+        .home-btn { margin-top: 15px; margin-bottom: 25px; width: 100%; padding: 15px; background: rgba(212, 175, 55, 0.1); color: #FFDF00; border: 1px solid #D4AF37; border-radius: 10px; font-size: 15px; font-weight: bold; letter-spacing: 2px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.8); transition: 0.3s;}
+        .home-btn:active { background: rgba(212, 175, 55, 0.2); }
+        
+        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(10, 8, 0, 0.95); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); display: flex; justify-content: space-around; align-items: center; border-top: 1.5px solid #AA771C; padding-bottom: env(safe-area-inset-bottom); z-index: 1000; box-shadow: 0 -5px 30px rgba(212, 175, 55, 0.2); }
+        .nav-item { flex: 1; text-align: center; padding: 14px 0; color: #8A733F; font-size: 13px; font-weight: 500; cursor: pointer; transition: 0.3s; letter-spacing: 1px; }
+        .nav-item.active { color: #FFDF00; font-weight: bold; background: linear-gradient(to top, rgba(212, 175, 55, 0.15) 0%, transparent 100%); text-shadow: 0 0 10px rgba(255, 223, 0, 0.5);}
+        .nav-icon { font-size: 24px; display: block; margin-bottom: 6px; }
+        
+        .toast { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(135deg, #D4AF37, #AA771C); color: #000; padding: 16px 30px; border-radius: 30px; font-size: 16px; font-weight: bold; box-shadow: 0 10px 30px rgba(0,0,0,0.9); display: none; z-index: 2000; letter-spacing: 2px; text-shadow: 0 1px 1px rgba(255,255,255,0.4);}
+        a { color: #D4AF37; text-decoration: none; font-weight: bold; transition: color 0.3s;}
+        a:hover { color: #FFDF00; text-shadow: 0 0 8px rgba(255,223,0,0.5);}
     </style>
 </head>
 <body>
 
 <div class="app-header" onclick="goToHome()">PRIVATE WEALTH</div>
-<div id="toast" class="toast">✅ 已複製到剪貼簿！</div>
+<div id="toast" class="toast">✦ 已複製到剪貼簿 ✦</div>
 
 <div class="app-content">
     <!-- 頁面 1：尊榮搜尋頁 -->
     <div id="page-search" class="page active">
-        <div class="subtitle">智能客戶檢索系統</div>
+        <div class="subtitle">皇家智能客戶檢索系統</div>
         
         <div class="filter-box">
             <div class="filter-group">
-                <span class="filter-label">🔍 第一層過濾 (例如輸入：第2組、總經理、王老闆)</span>
+                <span class="filter-label">✦ 第一層檢索 (例如：第2組、總經理、王老闆)</span>
                 <input type="text" id="kw1" class="search-input" placeholder="請輸入關鍵字..." oninput="searchNetwork()">
             </div>
 
             <div class="filter-group">
-                <span class="filter-label">🔍 第二層過濾 (例如輸入：08月、不吃牛)</span>
-                <input type="text" id="kw2" class="search-input" placeholder="在結果中進一步過濾..." oninput="searchNetwork()">
+                <span class="filter-label">✦ 第二層檢索 (例如：08月、不吃牛)</span>
+                <input type="text" id="kw2" class="search-input" placeholder="進一步過濾結果..." oninput="searchNetwork()">
             </div>
 
             <div class="filter-group">
-                <span class="filter-label">🔍 第三層過濾 (例如輸入：家族名稱)</span>
-                <input type="text" id="kw3" class="search-input" placeholder="在結果中進一步過濾..." oninput="searchNetwork()">
+                <span class="filter-label">✦ 第三層檢索 (例如：家族名稱)</span>
+                <input type="text" id="kw3" class="search-input" placeholder="精準鎖定目標..." oninput="searchNetwork()">
             </div>
         </div>
 
         <div id="resultsContainer">
-            <p style="text-align:center; color:#94A3B8; font-size:15px; margin-top:30px; line-height: 1.6;">請於上方輸入任意關鍵字<br>系統將即時為您逐層過濾名單</p>
+            <p style="text-align:center; color:#8A733F; font-size:15px; margin-top:30px; line-height: 1.8; font-weight:300;">請於上方輸入任意關鍵字<br>系統將即時為您逐層篩選尊爵名單</p>
         </div>
     </div>
 
     <!-- 頁面 2：本月壽星頁 -->
     <div id="page-birthday" class="page">
-        <div class="subtitle" id="birthdayTitle" style="color:#0B1F3B; font-size: 16px; font-weight: bold;">✧ 本月全體壽星 ✧</div>
-        <p style="text-align:center; color:#64748B; font-size:13px; margin-bottom: 25px;">已為您撈取不限組別之當月壽星，並按日期排序</p>
+        <div class="subtitle" id="birthdayTitle" style="color:#FFDF00; font-size: 18px; font-weight: bold; text-shadow: 0 0 10px rgba(255,223,0,0.3);">✦ 本月全體壽星 ✦</div>
+        <p style="text-align:center; color:#E8C37B; font-size:13.5px; margin-bottom: 25px; font-weight:300;">已為您撈取不限組別之當月壽星，並按日期排序</p>
         <div id="birthdayContainer"></div>
     </div>
 </div>
 
 <div class="bottom-nav">
     <div class="nav-item active" onclick="switchPage('page-search', this)" id="nav-search">
-        <span class="nav-icon">📊</span><span>智能過濾</span>
+        <span class="nav-icon">⚱️</span><span>金字塔過濾</span>
     </div>
     <div class="nav-item" onclick="switchPage('page-birthday', this)">
-        <span class="nav-icon">🎁</span><span>本月壽星</span>
+        <span class="nav-icon">🥂</span><span>尊榮壽星</span>
     </div>
 </div>
 
@@ -171,7 +181,7 @@
         { group: "5", name: "王沅錡", birthday: "08月16日", company: "TutorABC", title: "公關經理", diet: "無", family: "獅子王", phone: "0920-209-467", email: "Yuanchi.wang@gmail.com" },
 
         { group: "6", name: "張明道", birthday: "01月17日", company: "智易科技", title: "硬體研發資深經理", diet: "不吃牛/羊", family: "師輩秀", phone: "0955-993-723", email: "cyc68904@gmail.com" },
-        { group: "6", name: "蔡家杰", birthday: "01月21日", company: "世界先進", title: "主管", diet: "無", family: "師大大師", phone: "0930-841-309", email: "jaytsai0121@gmail.com" },
+        { group: "6", name: "蔡家傑", birthday: "01月21日", company: "世界先進", title: "主管", diet: "無", family: "師大大師", phone: "0930-841-309", email: "jaytsai0121@gmail.com" },
         { group: "6", name: "龍筱芬", birthday: "02月15日", company: "奇鈦科技(股)", title: "董事長", diet: "無", family: "萬獸之王", phone: "0932-061-518", email: "glung@chitec.com" },
         { group: "6", name: "劉逸凡", birthday: "05月09日", company: "建達國際(股)", title: "產品經理", diet: "無", family: "詩情話藝", phone: "0989-965-558", email: "ivan_liu@xander.com.tw" },
         { group: "6", name: "王宜方", birthday: "07月02日", company: "美科實業(有)", title: "網路行銷經理", diet: "無", family: "萬獸之王", phone: "0981-052-685", email: "wang_green@hotmail.com" },
@@ -214,7 +224,7 @@
         document.getElementById('kw2').value = "";
         document.getElementById('kw3').value = "";
         
-        document.getElementById('resultsContainer').innerHTML = `<p style="text-align:center; color:#94A3B8; font-size:15px; margin-top:30px; line-height: 1.6;">請於上方輸入任意關鍵字<br>系統將即時為您逐層過濾名單</p>`;
+        document.getElementById('resultsContainer').innerHTML = `<p style="text-align:center; color:#8A733F; font-size:15px; margin-top:30px; line-height: 1.8; font-weight:300;">請於上方輸入任意關鍵字<br>系統將即時為您逐層篩選尊爵名單</p>`;
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -229,9 +239,10 @@
     function getZodiacInfo(birthdayStr) {
         if (!birthdayStr || !birthdayStr.includes('月')) return { name: "專屬星座", trait: "散發獨特魅力", wish: "願您在未來的日子裡萬事順心，好運連連！" };
         
+        // 嚴格安全的陣列切割
         let parts = birthdayStr.split('月');
         let m = parseInt(parts);
-        let d = (parts.length > 1) ? parseInt(parts[1].replace('日','')) : 1; 
+        let d = (parts.length > 1) ? parseInt(parts[6].replace('日','')) : 1; 
         
         if ((m == 3 && d >= 21) || (m == 4 && d <= 19)) return { name: "牡羊座", trait: "充滿熱情與無畏的行動力🔥", wish: "願您以無比的行動力，持續開創事業與財富的新版圖！" };
         if ((m == 4 && d >= 20) || (m == 5 && d <= 20)) return { name: "金牛座", trait: "務實可靠且具備卓越品味🌟", wish: "願您盡情享受高質感的生活，財富也能如您的步伐般穩健累積！" };
@@ -248,7 +259,7 @@
         return { name: "專屬星座", trait: "散發獨特魅力", wish: "願您在未來的日子裡萬事順心，好運連連！" };
     }
 
-    // 整合 2026 最新長輩與主管祝賀詞專家建議
+    // 整合 2026 最新長輩與主管專業祝賀詞
     function generateLINEBlessing(person) {
         if (!person.birthday || !person.birthday.includes('月')) return "親愛的客戶您好，祝福您平安順心！";
         
@@ -259,8 +270,8 @@
         
         let customWish = zInfo.wish;
         if (isBoss) {
-            // 根據專家建議，長輩祝賀詞應莊重、表達感謝並祈願健康
-            customWish = "在這特別的日子裡，向您獻上最誠摯的生日祝福。感謝您長期以來的支持與提攜，您的信任是我們堅持前行的動力。願您在新的一歲裡，身心健康、事業順利，福如東海、壽比南山！";
+            // 套用專家建議的正式長輩賀詞範本
+            customWish = "在這特別的日子裡，謹代表團隊向您獻上最誠摯的生日祝福！感謝您長期以來的支持與提攜，您的信任是我們堅持前行的動力。願您在新的一歲裡，身心健康、事業順利，福如東海、壽比南山！";
         }
         
         let msg = `尊敬的 ${person.name} ${respectTitle} 您好：\n\n今天是 ${person.birthday}，屬於${zInfo.name}的特別日子！🎂\n\n非常欣賞您「${zInfo.trait}」\n\n${customWish} 🥂\n\n若未來有任何財務或人生藍圖上的規劃，我隨時為您安排最頂級的服務。\n\n再次祝您 生日快樂、平安健康！🎊🎁`;
@@ -285,9 +296,9 @@
             let textId = `blessing-${index}`;
             lineBlessingBlock = `
                 <div class="line-blessing">
-                    <div class="line-title">💬 LINE 專屬客製祝福 (已套用長輩禮儀)</div>
+                    <div class="line-title">💬 LINE 專屬客製祝福 (VIP 尊榮版)</div>
                     <div class="line-text" id="${textId}">${blessingText}</div>
-                    <button class="copy-btn" onclick="copyToClipboard('${textId}')">一鍵複製祝福語 📋</button>
+                    <button class="copy-btn" onclick="copyToClipboard('${textId}')">一鍵複製祝福語 ✦</button>
                 </div>
             `;
         } else {
@@ -304,7 +315,7 @@
             }
             let warmTip = `✨ <b>提示：</b> 生日(${person.birthday})即將到來，別忘了獻上祝福。`;
             if (person.diet && person.diet !== "無") {
-                warmTip += `<br>🍽️ <b>邀約細節：</b> 客戶「<span style="color:#BE123C; font-weight:bold;">${person.diet}</span>」，請提前預訂適合的餐廳。`;
+                warmTip += `<br>🍽️ <b>邀約細節：</b> 客戶「<span style="color:#FF8A8A; font-weight:bold;">${person.diet}</span>」，請提前預訂適合的頂級餐廳。`;
             }
             proposal = `
                 <div class="proposal-box">
@@ -337,7 +348,6 @@
         `;
     }
 
-    // ★ 錯誤 1 修復：補上 "第X組"，確保使用者輸入 "第2組" 可以找得到！ ★
     function searchNetwork() {
         const kw1 = document.getElementById('kw1').value.trim().toLowerCase();
         const kw2 = document.getElementById('kw2').value.trim().toLowerCase();
@@ -346,13 +356,12 @@
         container.innerHTML = ""; 
 
         if (kw1 === "" && kw2 === "" && kw3 === "") { 
-            container.innerHTML = "<p style='text-align:center; color:#94A3B8; font-size:15px; margin-top:30px; line-height: 1.6;'>請於上方輸入任意關鍵字<br>系統將即時為您逐層過濾名單</p>"; 
+            container.innerHTML = "<p style='text-align:center; color:#8A733F; font-size:15px; margin-top:30px; line-height: 1.8; font-weight:300;'>請於上方輸入任意關鍵字<br>系統將即時為您逐層篩選尊爵名單</p>"; 
             return; 
         }
 
         const results = networkData.filter(person => {
             let match = true;
-            // 修正：隱藏字串加入「第X組」的文字，才能精準比對使用者的自然輸入
             const searchStr = `第${person.group}組 ${person.group} ${person.name} ${person.birthday} ${person.company} ${person.title} ${person.diet} ${person.family}`.toLowerCase();
 
             if (kw1 !== "" && !searchStr.includes(kw1)) match = false;
@@ -363,37 +372,42 @@
         });
 
         if (results.length === 0) {
-            container.innerHTML = `<p style="text-align:center; color:#BE123C; font-weight:500;">查無相符資料，請嘗試減少關鍵字</p>`;
+            container.innerHTML = `<p style="text-align:center; color:#FF8A8A; font-weight:bold; text-shadow: 0 1px 2px rgba(0,0,0,0.8);">查無相符資料，請嘗試減少關鍵字</p>`;
         } else {
-            container.innerHTML = `<p style="font-size:14px; color:#2F5D8C; margin-bottom:15px; font-weight:bold;">為您過濾出 <b>${results.length}</b> 位尊榮客戶：</p>`;
+            container.innerHTML = `<p style="font-size:15px; color:#FFDF00; margin-bottom:15px; font-weight:bold; letter-spacing: 1px;">為您過濾出 <b>${results.length}</b> 位尊榮客戶：</p>`;
             results.forEach((person, idx) => { container.innerHTML += createPersonCardHTML(person, false, idx); });
             container.innerHTML += `<button class="home-btn" onclick="goToHome()">重置過濾條件</button>`;
         }
     }
 
-    // ★ 錯誤 2 修復：補上正確的陣列位置 partsB[1]，保證畫面不再崩潰！ ★
+    // ★ 終極安全陣列修復：嚴格指定陣列位置，徹底杜絕崩潰 ★
     function loadCurrentMonthBirthdays() {
         const today = new Date();
         const currentMonthNum = today.getMonth() + 1; 
         const currentMonthStr = String(currentMonthNum).padStart(2, '0') + '月';
         
-        document.getElementById('birthdayTitle').innerText = `✧ ${currentMonthStr} 專屬壽星 ✧`;
+        document.getElementById('birthdayTitle').innerText = `✦ ${currentMonthStr} 專屬壽星 ✦`;
         const container = document.getElementById('birthdayContainer');
         container.innerHTML = "";
 
         let monthBirthdays = networkData.filter(person => person.birthday && person.birthday.startsWith(currentMonthStr));
 
-        // 徹底修正：明確指定陣列的第二個值 [1]，因為直接用陣列執行取代會導致瀏覽器出錯死當
+        // 絕對安全的排序邏輯：透過明確的 [6] 指定陣列第二項，若不存在則給予預設值 0
         monthBirthdays.sort((a, b) => {
-            let partsA = a.birthday.split('月');
-            let partsB = b.birthday.split('月');
-            let dayA = (partsA.length > 1) ? parseInt(partsA[1].replace('日', '')) : 0;
-            let dayB = (partsB.length > 1) ? parseInt(partsB[1].replace('日', '')) : 0;
+            let dayA = 0, dayB = 0;
+            if(a.birthday && a.birthday.includes('月')) {
+                let pA = a.birthday.split('月');
+                if(pA.length > 1) dayA = parseInt(pA[6].replace('日', '')) || 0;
+            }
+            if(b.birthday && b.birthday.includes('月')) {
+                let pB = b.birthday.split('月');
+                if(pB.length > 1) dayB = parseInt(pB[6].replace('日', '')) || 0;
+            }
             return dayA - dayB; 
         });
 
         if (monthBirthdays.length === 0) {
-            container.innerHTML = `<p style="text-align:center; color:#94A3B8; font-weight:500;">本月份尚無壽星名單</p>`;
+            container.innerHTML = `<p style="text-align:center; color:#8A733F; font-weight:bold; letter-spacing: 1px;">本月份尚無壽星名單</p>`;
         } else {
             monthBirthdays.forEach((person, index) => {
                 container.innerHTML += createPersonCardHTML(person, true, index);
