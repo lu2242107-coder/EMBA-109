@@ -64,18 +64,21 @@
         .home-btn { margin-top: 15px; margin-bottom: 25px; width: 100%; padding: 15px; background: rgba(212, 175, 55, 0.1); color: #FFDF00; border: 1px solid #D4AF37; border-radius: 10px; font-size: 15px; font-weight: bold; letter-spacing: 2px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.8); transition: 0.3s;}
         .home-btn:active { background: rgba(212, 175, 55, 0.2); }
         
-        /* 第三頁 遠銀專屬卡片 */
+        /* 遠銀專屬卡片 */
         .feib-card { background: linear-gradient(145deg, #111, #000); border: 1px solid #D4AF37; border-radius: 16px; padding: 30px 20px; text-align: center; margin-bottom: 25px; box-shadow: 0 10px 20px rgba(0,0,0,0.8), inset 0 0 15px rgba(212, 175, 55, 0.1); transition: 0.3s; cursor: pointer;}
         .feib-card:active { transform: scale(0.98); }
         .feib-icon { font-size: 40px; margin-bottom: 15px; display: block;}
         .feib-title { color: #FFDF00; font-size: 20px; font-weight: bold; letter-spacing: 2px; margin-bottom: 10px; text-shadow: 0 2px 5px rgba(0,0,0,0.9); }
         .feib-desc { color: #E8C37B; font-size: 14px; line-height: 1.6; font-weight: 300;}
 
-        /* 底部導航 (新增第三按鈕) */
+        /* 備註與小字 */
+        .card-note { color: #8A733F; font-size: 12.5px; margin-top: 15px; line-height: 1.5; border-top: 1px dashed rgba(212, 175, 55, 0.3); padding-top: 10px; }
+
+        /* 底部導航 (四個按鈕) */
         .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(10, 8, 0, 0.95); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); display: flex; justify-content: space-around; align-items: center; border-top: 1.5px solid #AA771C; padding-bottom: env(safe-area-inset-bottom); z-index: 1000; box-shadow: 0 -5px 30px rgba(212, 175, 55, 0.2); }
-        .nav-item { flex: 1; text-align: center; padding: 14px 0; color: #8A733F; font-size: 13px; font-weight: 500; cursor: pointer; transition: 0.3s; letter-spacing: 1px; }
+        .nav-item { flex: 1; text-align: center; padding: 12px 0; color: #8A733F; font-size: 12px; font-weight: 500; cursor: pointer; transition: 0.3s; letter-spacing: 1px; }
         .nav-item.active { color: #FFDF00; font-weight: bold; background: linear-gradient(to top, rgba(212, 175, 55, 0.15) 0%, transparent 100%); text-shadow: 0 0 10px rgba(255, 223, 0, 0.5);}
-        .nav-icon { font-size: 22px; display: block; margin-bottom: 6px; }
+        .nav-icon { font-size: 20px; display: block; margin-bottom: 4px; }
         
         .toast { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(135deg, #D4AF37, #AA771C); color: #000; padding: 16px 30px; border-radius: 30px; font-size: 16px; font-weight: bold; box-shadow: 0 10px 30px rgba(0,0,0,0.9); display: none; z-index: 2000; letter-spacing: 2px; text-shadow: 0 1px 1px rgba(255,255,255,0.4);}
         a { color: #D4AF37; text-decoration: none; font-weight: bold; transition: color 0.3s;}
@@ -140,6 +143,44 @@
             <div class="feib-desc">尊榮星等，非凡體驗。<br>探索專屬於您的理財手續費優惠、頂級生日禮及豐富的品味生活特權。</div>
         </div>
     </div>
+
+    <!-- 頁面 4：2026 刷卡優惠 -->
+    <div id="page-card" class="page">
+        <div class="subtitle" style="color:#FFDF00; font-size: 18px; font-weight: bold; text-shadow: 0 0 10px rgba(255,223,0,0.3);">✦ 2026 遠銀刷卡優惠 ✦</div>
+        <p style="text-align:center; color:#E8C37B; font-size:13.5px; margin-bottom: 25px; font-weight:300;">遠東快樂信用卡 · 尊榮回饋總覽</p>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-name" style="font-size: 18px;">指定通路最高 5% 回饋</div>
+                <div class="card-group">至 2026/6/30</div>
+            </div>
+            <div class="card-info"><span class="info-icon">🏬</span><span>百貨超市：SOGO、遠百、巨城、愛買等</span></div>
+            <div class="card-info"><span class="info-icon">🛍️</span><span>日常消費：momo、蝦皮、ZARA、星巴克等</span></div>
+            <div class="card-info"><span class="info-icon">📱</span><span>行動支付：LINE Pay 消費</span></div>
+            <div class="card-note">* 每月限登錄 1 萬名，每月每戶回饋上限 300 元，正卡須綁定「遠銀 HAPPY+」LINE 官方帳號。</div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-name" style="font-size: 18px;">悠遊卡自動加值 5% 回饋</div>
+                <div class="card-group">至 2026/6/30</div>
+            </div>
+            <div class="card-info"><span class="info-icon">💳</span><span>以快樂信用卡之悠遊卡功能進行自動加值</span></div>
+            <div class="card-note">* 須當月登錄當月自動加值，每月每戶回饋上限 50 元刷卡金。</div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-name" style="font-size: 18px;">滿額最高回饋 500 元</div>
+                <div class="card-group">至 2026/12/31</div>
+            </div>
+            <div class="card-info"><span class="info-icon">💰</span><span>滿 1.5 萬：一般戶回饋 100元 / 自扣戶 150元</span></div>
+            <div class="card-info"><span class="info-icon">💎</span><span>滿 3 萬元：一般戶回饋 400元 / 自扣戶 500元</span></div>
+            <div class="card-note">* 自扣戶須申辦遠銀帳戶自動扣繳信用卡費且扣款成功。當期帳單須於次期結帳日前完成指定網頁登錄。</div>
+        </div>
+        
+        <p style="text-align:center; color:#8A733F; font-size:12px; margin-top:20px; font-weight:300;">* 詳細活動辦法、限制與跨境交易規範，請以遠銀官方最新公告為準。</p>
+    </div>
 </div>
 
 <div class="bottom-nav">
@@ -151,6 +192,9 @@
     </div>
     <div class="nav-item" onclick="switchPage('page-feib', this)">
         <span class="nav-icon">🏦</span><span>遠銀財管</span>
+    </div>
+    <div class="nav-item" onclick="switchPage('page-card', this)">
+        <span class="nav-icon">💳</span><span>刷卡優惠</span>
     </div>
 </div>
 
@@ -263,13 +307,12 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // 【陣列取值已 100% 絕對修復】保證安全執行 replace 不會當機
     function getZodiacInfo(birthdayStr) {
         if (!birthdayStr || !birthdayStr.includes('月')) return { name: "專屬星座", trait: "散發獨特魅力", wish: "願您在未來的日子裡萬事順心，好運連連！" };
         
         let parts = birthdayStr.split('月');
         let m = parseInt(parts);
-        let d = (parts.length > 1) ? parseInt(parts[1].replace('日','')) : 1; 
+        let d = (parts.length > 1) ? parseInt(parts.replace('日','')) : 1; 
         
         if ((m == 3 && d >= 21) || (m == 4 && d <= 19)) return { name: "牡羊座", trait: "充滿熱情與無畏的行動力🔥", wish: "願您以無比的行動力，持續開創事業與財富的新版圖！" };
         if ((m == 4 && d >= 20) || (m == 5 && d <= 20)) return { name: "金牛座", trait: "務實可靠且具備卓越品味🌟", wish: "願您盡情享受高質感的生活，財富也能如您的步伐般穩健累積！" };
@@ -286,7 +329,6 @@
         return { name: "專屬星座", trait: "散發獨特魅力", wish: "願您在未來的日子裡萬事順心，好運連連！" };
     }
 
-    // 整合長輩與主管專業祝賀詞
     function generateLINEBlessing(person) {
         if (!person.birthday || !person.birthday.includes('月')) return "親愛的客戶您好，祝福您平安順心！";
         
@@ -339,7 +381,7 @@
             } else {
                 suggestion = "面對瞬息萬變的市場，您需要靈活的財務支援。無論是<b>購屋換車的優惠貸款</b>，或<b>彈性資金存款配置</b>，我都會為您爭取最優條件。";
             }
-            let warmTip = `✨ <b>提示：</b> 生日(${person.birthday})即將到來，別忘了獻上祝福。`;
+            let warmTip = `✨ <b>提示：</b> 生日(${person.birthday})即爬到來，別忘了獻上祝福。`;
             if (person.diet && person.diet !== "無") {
                 warmTip += `<br>🍽️ <b>邀約細節：</b> 客戶「<span style="color:#FF8A8A; font-weight:bold;">${person.diet}</span>」，請提前預訂適合的頂級餐廳。`;
             }
@@ -406,7 +448,6 @@
         }
     }
 
-    // 【陣列取值已 100% 絕對修復】明確宣告與抓取 `[1]`，徹底杜絕瀏覽器報錯！
     function loadCurrentMonthBirthdays() {
         const today = new Date();
         const currentMonthNum = today.getMonth() + 1; 
@@ -423,13 +464,13 @@
             if (a.birthday && a.birthday.includes('月')) {
                 let partsA = a.birthday.split('月');
                 if (partsA.length > 1) {
-                    dayA = parseInt(partsA[1].replace('日', '')) || 0;
+                    dayA = parseInt(partsA.replace('日', '')) || 0;
                 }
             }
             if (b.birthday && b.birthday.includes('月')) {
                 let partsB = b.birthday.split('月');
                 if (partsB.length > 1) {
-                    dayB = parseInt(partsB[1].replace('日', '')) || 0;
+                    dayB = parseInt(partsB.replace('日', '')) || 0;
                 }
             }
             return dayA - dayB; 
