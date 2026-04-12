@@ -63,22 +63,15 @@
         
         .home-btn { margin-top: 15px; margin-bottom: 25px; width: 100%; padding: 15px; background: rgba(212, 175, 55, 0.1); color: #FFDF00; border: 1px solid #D4AF37; border-radius: 10px; font-size: 15px; font-weight: bold; letter-spacing: 2px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.8); transition: 0.3s;}
         .home-btn:active { background: rgba(212, 175, 55, 0.2); }
-        
-        /* 專屬發光卡片 (可點擊) */
-        .feib-card { background: linear-gradient(145deg, #111, #000); border: 1px solid #D4AF37; border-radius: 16px; padding: 30px 20px; text-align: center; margin-bottom: 25px; box-shadow: 0 10px 20px rgba(0,0,0,0.8), inset 0 0 15px rgba(212, 175, 55, 0.1); transition: 0.3s; cursor: pointer;}
-        .feib-card:active { transform: scale(0.98); }
-        .feib-icon { font-size: 40px; margin-bottom: 15px; display: block;}
-        .feib-title { color: #FFDF00; font-size: 20px; font-weight: bold; letter-spacing: 2px; margin-bottom: 10px; text-shadow: 0 2px 5px rgba(0,0,0,0.9); }
-        .feib-desc { color: #E8C37B; font-size: 14px; line-height: 1.6; font-weight: 300;}
 
         /* 備註與小字 */
         .card-note { color: #8A733F; font-size: 12.5px; margin-top: 15px; line-height: 1.5; border-top: 1px dashed rgba(212, 175, 55, 0.3); padding-top: 10px; }
 
-        /* 底部導航 */
+        /* 底部導航 (2個按鈕精簡版) */
         .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(10, 8, 0, 0.95); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); display: flex; justify-content: space-around; align-items: center; border-top: 1.5px solid #AA771C; padding-bottom: env(safe-area-inset-bottom); z-index: 1000; box-shadow: 0 -5px 30px rgba(212, 175, 55, 0.2); }
-        .nav-item { flex: 1; text-align: center; padding: 12px 0; color: #8A733F; font-size: 11.5px; font-weight: 500; cursor: pointer; transition: 0.3s; letter-spacing: 0.5px; }
+        .nav-item { flex: 1; text-align: center; padding: 15px 0; color: #8A733F; font-size: 13px; font-weight: 500; cursor: pointer; transition: 0.3s; letter-spacing: 1px; }
         .nav-item.active { color: #FFDF00; font-weight: bold; background: linear-gradient(to top, rgba(212, 175, 55, 0.15) 0%, transparent 100%); text-shadow: 0 0 10px rgba(255, 223, 0, 0.5);}
-        .nav-icon { font-size: 18px; display: block; margin-bottom: 4px; }
+        .nav-icon { font-size: 20px; display: block; margin-bottom: 5px; }
         
         .toast { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(135deg, #D4AF37, #AA771C); color: #000; padding: 16px 30px; border-radius: 30px; font-size: 16px; font-weight: bold; box-shadow: 0 10px 30px rgba(0,0,0,0.9); display: none; z-index: 2000; letter-spacing: 2px; text-shadow: 0 1px 1px rgba(255,255,255,0.4);}
         a { color: #D4AF37; text-decoration: none; font-weight: bold; transition: color 0.3s;}
@@ -100,12 +93,10 @@
                 <span class="filter-label">✦ 第一層檢索 (例如：第2組、總經理、王老闆)</span>
                 <input type="text" id="kw1" class="search-input" placeholder="請輸入關鍵字..." oninput="searchNetwork()">
             </div>
-
             <div class="filter-group">
                 <span class="filter-label">✦ 第二層檢索 (例如：08月、不吃牛)</span>
                 <input type="text" id="kw2" class="search-input" placeholder="進一步過濾結果..." oninput="searchNetwork()">
             </div>
-
             <div class="filter-group">
                 <span class="filter-label">✦ 第三層檢索 (例如：家族名稱)</span>
                 <input type="text" id="kw3" class="search-input" placeholder="精準鎖定目標..." oninput="searchNetwork()">
@@ -117,147 +108,21 @@
         </div>
     </div>
 
-    <!-- 頁面 2：本月壽星頁 (已完美修復白畫面 Bug) -->
+    <!-- 頁面 2：本月壽星頁 -->
     <div id="page-birthday" class="page">
         <div class="subtitle" id="birthdayTitle" style="color:#FFDF00; font-size: 18px; font-weight: bold; text-shadow: 0 0 10px rgba(255,223,0,0.3);">✦ 本月全體壽星 ✦</div>
         <p style="text-align:center; color:#E8C37B; font-size:13.5px; margin-bottom: 25px; font-weight:300;">已為您撈取不限組別之當月壽星，並按日期排序</p>
         <div id="birthdayContainer"></div>
     </div>
 
-    <!-- 頁面 3：遠銀財富管理 (2026年最新升級) -->
-    <div id="page-feib" class="page">
-        <div class="subtitle" style="color:#FFDF00; font-size: 18px; font-weight: bold; text-shadow: 0 0 10px rgba(255,223,0,0.3);">✦ 遠銀財管 VIP 尊榮禮遇 ✦</div>
-        <p style="text-align:center; color:#E8C37B; font-size:13.5px; margin-bottom: 25px; font-weight:300;">2026 年最新財富管理 · VIP 完整手冊</p>
-
-        <!-- 3P策略 & 4K認證 -->
-        <div class="card">
-            <div class="card-header">
-                <div class="card-name" style="font-size: 18px;">家族理財 4K 顧問服務</div>
-                <div class="card-group">跨領域專家團隊</div>
-            </div>
-            <div class="card-info"><span class="info-icon">💎</span><span><b>獨家 3P 策略：</b>資產保護 (Protection)、保值 (Preservation) 與增值 (Profit) 全方位配置規劃。</span></div>
-            <div class="card-info"><span class="info-icon">🤝</span><span><b>4K 認證管家：</b>深研了解客戶(KYC)、商品(KYP)、稅制(KYT)及信託(KYT)，提供 "One team to one service" 傳承尊榮服務。</span></div>
-        </div>
-
-        <!-- 尊榮星等權益 -->
-        <div class="card">
-            <div class="card-header">
-                <div class="card-name" style="font-size: 18px;">VIP 尊榮星等權益</div>
-                <div class="card-group">3 ~ 7 星等尊享</div>
-            </div>
-            <div class="card-info"><span class="info-icon">🌟</span><span><b>七大星等禮遇：</b>從 3 星等菁英至最高 7 星等頂級尊榮，享客製化手續費減免與機場接送、頂級生日禮。</span></div>
-            <div class="card-info"><span class="info-icon">🛡️</span><span><b>信託守護人管家：</b>業界首創平台，提供安養、子女、創業與保險金信託等資產傳承防護網。</span></div>
-            <div class="card-info"><span class="info-icon">🕶️</span><span><b>十樂元宇宙 2.0：</b>結合 AI 與 VR 科技，隨時隨地漫遊創新金融虛擬特色分行。</span></div>
-        </div>
-
-        <div class="feib-card" onclick="window.open('https://www.feib.com.tw/upload/family_vip/index.html', '_blank')">
-            <span class="feib-icon">🏛️</span>
-            <div class="feib-title">遠銀家族 VIP 官網</div>
-            <div class="feib-desc">點擊查看 2026 跨世代財富傳承完整計畫與官方公告。</div>
-        </div>
-    </div>
-
-    <!-- 頁面 4：2026 刷卡優惠 -->
-    <div id="page-card" class="page">
-        <div class="subtitle" style="color:#FFDF00; font-size: 18px; font-weight: bold; text-shadow: 0 0 10px rgba(255,223,0,0.3);">✦ 2026 遠銀刷卡優惠 ✦</div>
-        <p style="text-align:center; color:#E8C37B; font-size:13.5px; margin-bottom: 25px; font-weight:300;">遠東快樂信用卡 · 尊榮回饋總覽</p>
-
-        <div class="card">
-            <div class="card-header">
-                <div class="card-name" style="font-size: 18px;">指定通路最高 5% 回饋</div>
-                <div class="card-group">至 2026/6/30</div>
-            </div>
-            <div class="card-info"><span class="info-icon">🏬</span><span>百貨超市：SOGO、遠百、巨城、愛買等</span></div>
-            <div class="card-info"><span class="info-icon">🛍️</span><span>日常消費：momo、蝦皮、ZARA、星巴克等</span></div>
-            <div class="card-info"><span class="info-icon">📱</span><span>行動支付：LINE Pay 消費</span></div>
-            <div class="card-note">* 每月限登錄 1 萬名，每月每戶回饋上限 300 元，正卡須綁定「遠銀 HAPPY+」LINE 官方帳號。</div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">
-                <div class="card-name" style="font-size: 18px;">悠遊卡自動加值 5% 回饋</div>
-                <div class="card-group">至 2026/6/30</div>
-            </div>
-            <div class="card-info"><span class="info-icon">💳</span><span>以快樂信用卡之悠遊卡功能進行自動加值</span></div>
-            <div class="card-note">* 須當月登錄當月自動加值，每月每戶回饋上限 50 元刷卡金。</div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">
-                <div class="card-name" style="font-size: 18px;">滿額最高回饋 500 元</div>
-                <div class="card-group">至 2026/12/31</div>
-            </div>
-            <div class="card-info"><span class="info-icon">💰</span><span>滿 1.5 萬：一般戶回饋 100元 / 自扣戶 150元</span></div>
-            <div class="card-info"><span class="info-icon">💎</span><span>滿 3 萬元：一般戶回饋 400元 / 自扣戶 500元</span></div>
-            <div class="card-note">* 自扣戶須申辦遠銀帳戶自動扣繳信用卡費且扣款成功。當期帳單須於次期結帳日前完成指定網頁登錄。</div>
-        </div>
-        
-        <p style="text-align:center; color:#8A733F; font-size:12px; margin-top:20px; font-weight:300;">* 詳細活動辦法、限制與跨境交易規範，請以遠銀官方最新公告為準。</p>
-    </div>
-
-    <!-- 頁面 5：遠東集團 -->
-    <div id="page-feg" class="page">
-        <div class="subtitle" style="color:#FFDF00; font-size: 18px; font-weight: bold; text-shadow: 0 0 10px rgba(255,223,0,0.3);">✦ 遠東集團事業版圖 ✦</div>
-        <p style="text-align:center; color:#E8C37B; font-size:13.5px; margin-bottom: 25px; font-weight:300;">深耕台灣・橫跨九大產業的跨國集團</p>
-
-        <!-- 官網連結卡片 -->
-        <div class="feib-card" onclick="window.open('https://www.feg.com.tw/tw/about/profiles.aspx', '_blank')" style="background: linear-gradient(145deg, rgba(212, 175, 55, 0.15), rgba(0,0,0,0.9)); padding: 25px 20px;">
-            <span class="feib-icon">🌐</span>
-            <div class="feib-title" style="font-size: 18px;">遠東集團官方簡介</div>
-            <div class="feib-desc">點擊前往遠東集團官方網站<br>探索集團願景與完整事業藍圖。</div>
-        </div>
-
-        <!-- 產業版圖分類 -->
-        <div class="card">
-            <div class="card-header" style="border-bottom: 1px solid rgba(212, 175, 55, 0.4);">
-                <div class="card-name" style="font-size: 18px;">🛒 百貨零售與虛擬通路</div>
-            </div>
-            <div class="card-info"><span class="info-icon">🛍️</span><span>遠東SOGO百貨、遠東百貨、愛買</span></div>
-            <div class="card-info"><span class="info-icon">🏙️</span><span>Big City遠東巨城、遠東Garden City、遠企</span></div>
-            <div class="card-info"><span class="info-icon">📱</span><span>friDay購物、HAPPY GO (快樂購)</span></div>
-        </div>
-
-        <div class="card">
-            <div class="card-header" style="border-bottom: 1px solid rgba(212, 175, 55, 0.4);">
-                <div class="card-name" style="font-size: 18px;">🏦 金融服務與通訊網路</div>
-            </div>
-            <div class="card-info"><span class="info-icon">💳</span><span>遠東國際商業銀行、亞東證券、遠智證券</span></div>
-            <div class="card-info"><span class="info-icon">📡</span><span>遠傳電信、安源通訊 (Wifly)</span></div>
-        </div>
-
-        <div class="card">
-            <div class="card-header" style="border-bottom: 1px solid rgba(212, 175, 55, 0.4);">
-                <div class="card-name" style="font-size: 18px;">🚢 運輸觀光與工業製造</div>
-            </div>
-            <div class="card-info"><span class="info-icon">⛴️</span><span>裕民航運、香格里拉台北/台南遠東飯店</span></div>
-            <div class="card-info"><span class="info-icon">🏭</span><span>遠東新世紀、宏遠興業、東聯化學、亞東石化</span></div>
-            <div class="card-info"><span class="info-icon">🏗️</span><span>亞洲水泥、遠揚建設、遠揚營造</span></div>
-        </div>
-
-        <div class="card">
-            <div class="card-header" style="border-bottom: 1px solid rgba(212, 175, 55, 0.4);">
-                <div class="card-name" style="font-size: 18px;">🎓 教育與社會公益</div>
-            </div>
-            <div class="card-info"><span class="info-icon">🏫</span><span>元智大學、亞東科技大學、豫章工商</span></div>
-        </div>
-    </div>
 </div>
 
 <div class="bottom-nav">
     <div class="nav-item active" onclick="switchPage('page-search', this)" id="nav-search">
-        <span class="nav-icon">⚱️</span><span>金字塔過濾</span>
+        <span class="nav-icon">⚱️</span><span>智能檢索</span>
     </div>
     <div class="nav-item" onclick="switchPage('page-birthday', this)">
-        <span class="nav-icon">🥂</span><span>尊榮壽星</span>
-    </div>
-    <div class="nav-item" onclick="switchPage('page-feib', this)">
-        <span class="nav-icon">🏦</span><span>遠銀財管</span>
-    </div>
-    <div class="nav-item" onclick="switchPage('page-card', this)">
-        <span class="nav-icon">💳</span><span>刷卡優惠</span>
-    </div>
-    <div class="nav-item" onclick="switchPage('page-feg', this)">
-        <span class="nav-icon">🏢</span><span>遠東集團</span>
+        <span class="nav-icon">🥂</span><span>本月壽星</span>
     </div>
 </div>
 
@@ -346,7 +211,9 @@
         { group: "8", name: "郭亭廷", birthday: "11月08日", company: "富邦人壽", title: "業務經理", diet: "不吃牛", family: "師輩秀", phone: "0928-705-085", email: "Ting2@life.fubon.com" }
     ];
 
-    window.onload = function() { loadCurrentMonthBirthdays(); };
+    window.onload = function() { 
+        loadCurrentMonthBirthdays(); 
+    };
 
     function goToHome() {
         document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
@@ -370,14 +237,16 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // 【100%防呆白畫面修復】全面捨棄中括號，改用 shift() 與 pop() 抓取，徹底解決崩潰問題！
+    // 解析星座與專屬祝福語
     function getZodiacInfo(birthdayStr) {
         if (!birthdayStr || !birthdayStr.includes('月')) return { name: "專屬星座", trait: "散發獨特魅力", wish: "願您在未來的日子裡萬事順心，好運連連！" };
         
-        let mStr = birthdayStr.split('月').shift();
-        let dStr = birthdayStr.split('月').pop().replace('日','');
+        let parts = birthdayStr.split('月');
+        let mStr = parts.shift();
+        let dStr = parts.pop();
+        
         let m = parseInt(mStr, 10);
-        let d = parseInt(dStr, 10) || 1; 
+        let d = dStr ? parseInt(dStr.replace('日',''), 10) : 1; 
         
         if ((m == 3 && d >= 21) || (m == 4 && d <= 19)) return { name: "牡羊座", trait: "充滿熱情與無畏的行動力🔥", wish: "願您以無比的行動力，持續開創事業與財富的新版圖！" };
         if ((m == 4 && d >= 20) || (m == 5 && d <= 20)) return { name: "金牛座", trait: "務實可靠且具備卓越品味🌟", wish: "願您盡情享受高質感的生活，財富也能如您的步伐般穩健累積！" };
@@ -513,7 +382,7 @@
         }
     }
 
-    // 【100%防呆白畫面修復】捨棄中括號，改用 shift() 與 pop() 抓取
+    // 日期解析排版
     function loadCurrentMonthBirthdays() {
         const today = new Date();
         const currentMonthNum = today.getMonth() + 1; 
@@ -528,12 +397,16 @@
         monthBirthdays.sort((a, b) => {
             let dayA = 0, dayB = 0;
             if (a.birthday && a.birthday.includes('月')) {
-                let dStrA = a.birthday.split('月').pop().replace('日', '');
-                dayA = parseInt(dStrA, 10) || 0;
+                let partsA = a.birthday.split('月');
+                partsA.shift(); 
+                let dStrA = partsA.pop();
+                if (dStrA) dayA = parseInt(dStrA.replace('日', ''), 10) || 0;
             }
             if (b.birthday && b.birthday.includes('月')) {
-                let dStrB = b.birthday.split('月').pop().replace('日', '');
-                dayB = parseInt(dStrB, 10) || 0;
+                let partsB = b.birthday.split('月');
+                partsB.shift();
+                let dStrB = partsB.pop();
+                if (dStrB) dayB = parseInt(dStrB.replace('日', ''), 10) || 0;
             }
             return dayA - dayB; 
         });
@@ -546,7 +419,9 @@
             });
         }
     }
+
 </script>
 
 </body>
 </html>
+```
