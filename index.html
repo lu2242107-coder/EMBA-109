@@ -15,8 +15,14 @@
         body { margin: 0; padding: 0; font-family: "Helvetica Neue", "Times New Roman", "微軟正黑體", serif; background: linear-gradient(135deg, #0a0804 0%, #1a1500 100%); color: #F5DEB3; -webkit-tap-highlight-color: transparent; min-height: 100vh; }
         
         /* 頂部導航列 */
-        .app-header { position: fixed; top: 0; left: 0; width: 100%; background: rgba(15, 12, 5, 0.95); border-bottom: 2px solid #D4AF37; text-align: center; padding: 22px 0; font-size: 24px; font-weight: bold; letter-spacing: 5px; color: #FFDF00; text-shadow: 0 2px 15px rgba(255, 223, 0, 0.4); z-index: 1000; user-select: none; cursor: pointer; transition: 0.3s; backdrop-filter: blur(10px); }
-        .app-header:active { background: #1a1500; }
+        .app-header { position: fixed; top: 0; left: 0; width: 100%; background: rgba(15, 12, 5, 0.95); border-bottom: 2px solid #D4AF37; text-align: center; padding: 22px 0; font-size: 24px; font-weight: bold; letter-spacing: 5px; color: #FFDF00; text-shadow: 0 2px 15px rgba(255, 223, 0, 0.4); z-index: 1000; user-select: none; transition: 0.3s; backdrop-filter: blur(10px); display: flex; justify-content: center; align-items: center; }
+        .app-header-title { cursor: pointer; }
+        .app-header-title:active { color: #fff; }
+        
+        /* 桌面安裝按鈕 */
+        .install-btn { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); font-size: 13px; color: #E8C37B; background: rgba(212, 175, 55, 0.15); padding: 6px 12px; border-radius: 20px; border: 1px solid #D4AF37; cursor: pointer; letter-spacing: 1px; box-shadow: 0 2px 10px rgba(212, 175, 55, 0.2); transition: 0.3s; display: flex; align-items: center; gap: 5px; font-weight: bold; }
+        .install-btn:active { background: rgba(212, 175, 55, 0.4); transform: translateY(-50%) scale(0.95); }
+
         .app-content { padding: 105px 18px 90px 18px; }
         
         .subtitle { text-align: center; color: #E8C37B; font-size: 15px; margin-bottom: 25px; font-weight: 400; letter-spacing: 3px; }
@@ -64,24 +70,60 @@
         .home-btn { margin-top: 15px; margin-bottom: 25px; width: 100%; padding: 15px; background: rgba(212, 175, 55, 0.1); color: #FFDF00; border: 1px solid #D4AF37; border-radius: 10px; font-size: 15px; font-weight: bold; letter-spacing: 2px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.8); transition: 0.3s;}
         .home-btn:active { background: rgba(212, 175, 55, 0.2); }
 
-        /* 備註與小字 */
-        .card-note { color: #8A733F; font-size: 12.5px; margin-top: 15px; line-height: 1.5; border-top: 1px dashed rgba(212, 175, 55, 0.3); padding-top: 10px; }
-
         /* 底部導航 (2個按鈕精簡版) */
         .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(10, 8, 0, 0.95); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); display: flex; justify-content: space-around; align-items: center; border-top: 1.5px solid #AA771C; padding-bottom: env(safe-area-inset-bottom); z-index: 1000; box-shadow: 0 -5px 30px rgba(212, 175, 55, 0.2); }
         .nav-item { flex: 1; text-align: center; padding: 15px 0; color: #8A733F; font-size: 13px; font-weight: 500; cursor: pointer; transition: 0.3s; letter-spacing: 1px; }
         .nav-item.active { color: #FFDF00; font-weight: bold; background: linear-gradient(to top, rgba(212, 175, 55, 0.15) 0%, transparent 100%); text-shadow: 0 0 10px rgba(255, 223, 0, 0.5);}
         .nav-icon { font-size: 20px; display: block; margin-bottom: 5px; }
         
-        .toast { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(135deg, #D4AF37, #AA771C); color: #000; padding: 16px 30px; border-radius: 30px; font-size: 16px; font-weight: bold; box-shadow: 0 10px 30px rgba(0,0,0,0.9); display: none; z-index: 2000; letter-spacing: 2px; text-shadow: 0 1px 1px rgba(255,255,255,0.4);}
+        /* 桌面安裝指引彈出視窗 (Modal) */
+        .guide-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 3000; justify-content: center; align-items: center; backdrop-filter: blur(5px); animation: fadeIn 0.3s ease;}
+        .guide-content { background: linear-gradient(145deg, #1a1500, #0a0804); border: 2px solid #D4AF37; border-radius: 16px; padding: 25px 20px; width: 85%; max-width: 350px; box-shadow: 0 10px 40px rgba(0,0,0,0.9); position: relative; }
+        .close-guide { position: absolute; top: 15px; right: 18px; color: #D4AF37; font-size: 24px; cursor: pointer; font-weight: bold; transition: 0.3s;}
+        .close-guide:active { transform: scale(0.9); color: #FFDF00;}
+        .os-guide { margin-top: 18px; background: rgba(255,215,0,0.05); padding: 18px 15px; border-radius: 10px; border: 1px solid rgba(212,175,55,0.3); }
+        .os-guide h4 { margin: 0 0 10px 0; font-size: 16px; color: #FFDF00; border-bottom: 1px dashed rgba(212, 175, 55, 0.4); padding-bottom: 8px;}
+        .os-guide p { font-size: 14px; color: #F5DEB3; line-height: 1.8; margin: 0; font-weight: 300; }
+        .icon-hl { color: #FFF; background: #333; padding: 2px 6px; border-radius: 6px; border: 1px solid #777; font-size: 12px; margin: 0 3px;}
+
+        .toast { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(135deg, #D4AF37, #AA771C); color: #000; padding: 16px 30px; border-radius: 30px; font-size: 16px; font-weight: bold; box-shadow: 0 10px 30px rgba(0,0,0,0.9); display: none; z-index: 4000; letter-spacing: 2px; text-shadow: 0 1px 1px rgba(255,255,255,0.4);}
         a { color: #D4AF37; text-decoration: none; font-weight: bold; transition: color 0.3s;}
         a:hover { color: #FFDF00; text-shadow: 0 0 8px rgba(255,223,0,0.5);}
     </style>
 </head>
 <body>
 
-<div class="app-header" onclick="goToHome()">PRIVATE WEALTH</div>
+<div class="app-header">
+    <span class="app-header-title" onclick="goToHome()">PRIVATE WEALTH</span>
+    <div class="install-btn" onclick="showInstallGuide()"><span>📲 安裝</span></div>
+</div>
+
 <div id="toast" class="toast">✦ 已複製到剪貼簿 ✦</div>
+
+<!-- 桌面安裝引導 Modal -->
+<div id="installGuide" class="guide-modal">
+    <div class="guide-content">
+        <span class="close-guide" onclick="hideInstallGuide()">✖</span>
+        <h3 style="color:#FFDF00; margin-top:5px; text-align:center; font-size:18px; letter-spacing: 1px;">✦ 專屬系統加入桌面指引 ✦</h3>
+        <p style="text-align:center; color:#E8C37B; font-size:13px; margin-bottom: 20px; font-weight:300;">將本系統設為桌面 App，隨時快速檢索</p>
+        
+        <div class="os-guide">
+            <h4>🍎 iOS (iPhone / iPad)</h4>
+            <p>1. 必須使用 <b>Safari</b> 瀏覽器開啟。<br>
+               2. 點擊畫面最下方的 <b>「分享」</b> <span class="icon-hl">⍐</span> 圖示。<br>
+               3. 選單往下滑動，點擊 <b>「加入主畫面」</b> <span class="icon-hl">⊕</span>。<br>
+               4. 點擊右上角「新增」即可完成。</p>
+        </div>
+
+        <div class="os-guide">
+            <h4>🤖 Android (安卓系統)</h4>
+            <p>1. 建議使用 <b>Chrome</b> 瀏覽器開啟。<br>
+               2. 點擊畫面右上角的 <b>「選單」</b> <span class="icon-hl">⋮</span> (三個點)。<br>
+               3. 點選 <b>「加到主畫面」</b> 或 <b>「安裝應用程式」</b>。<br>
+               4. 確認「新增」即可完成。</p>
+        </div>
+    </div>
+</div>
 
 <div class="app-content">
     <!-- 頁面 1：尊榮搜尋頁 -->
@@ -235,6 +277,14 @@
         document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
         element.classList.add('active');
         window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /* 桌面安裝指引 Modal 顯示與隱藏 */
+    function showInstallGuide() {
+        document.getElementById('installGuide').style.display = 'flex';
+    }
+    function hideInstallGuide() {
+        document.getElementById('installGuide').style.display = 'none';
     }
 
     // 解析星座與專屬祝福語
@@ -424,4 +474,3 @@
 
 </body>
 </html>
-```
